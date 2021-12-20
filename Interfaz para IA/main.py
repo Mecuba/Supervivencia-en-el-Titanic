@@ -1,7 +1,8 @@
 from os import name
 from typing import List
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask.wrappers import Response
+import pickle
 
 HOST = ""
 
@@ -31,6 +32,23 @@ def llegada_datos():
     print(f'data_storage: {data_storage.items()}')
 
     return Response(status=200)
+
+
+'''
+¿Para realizar la predicción sería en una "pestaña" aparte?
+
+@app.route('/predecir', methods=[ 'POST'])
+def predecir():
+    jugador = ['Age']
+    filename = 'RegLog_model.sav'
+    pickle_in = open(filename, 'rb')
+    loaded_model = pickle.load(pickle_in)
+    Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
+                    'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
+    jugador['Survived'] = loaded_model.predict(jugador[Selected_features])
+    
+    return
+'''
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
