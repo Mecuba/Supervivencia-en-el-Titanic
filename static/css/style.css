@@ -1,0 +1,28 @@
+
+.Body{ 
+    background-color: #1f1f1f; 
+    color: #f1eded; 
+    margin: 1em;
+}
+
+.col-sm-1 {
+    padding: 1em;
+    font-weight: 500;
+}
+
+.form-select{
+    background-color: #1f1f1f; 
+    color: #f1eded;    
+}
+
+.form-control{
+    background-color: #1f1f1f; 
+    color: #f1eded;
+}
+
+.encabezado{
+    font-size: large;
+    margin-left: 0.5em;
+    font-weight: 700;
+}
+
