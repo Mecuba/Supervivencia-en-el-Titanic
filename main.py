@@ -8,13 +8,13 @@ HOST = ""
 app = Flask(__name__)
 
 '''Variables globales: '''
-#Aca se va a guardar los datos recibidos: 
+#Aca se va a guardar los datos recividos: 
 data_storage = {
     'edad': 30, 
     'pasajero': ['0','0','0'], 
-    'viaja_solo': '0', 
+    'viaja_solo': '0', #0 -> no 
     'puerto': ['0','0','0'],
-    'sexo': '0', 
+    'sexo': '0', #0 -> Mujer
 }
 
 LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
@@ -28,9 +28,11 @@ def llegada_datos():
     #Llegada de datos
     valores = request.form.getlist('data[]')
     guardar_variables_diccionario(valores)
+
     print(f'data_storage: {data_storage.items()}')
 
     return Response(status=200)
+
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
