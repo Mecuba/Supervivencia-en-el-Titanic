@@ -31,10 +31,14 @@ def llegada_datos():
     #Guarda ls valores en un diccionario: 
     guardar_variables_diccionario(valores)
 
-    save_data_juegos()
+    #Los datos se guardan en datos juegos: 
+    datos_juegos = save_data_juegos()
+    print(datos_juegos)
+
     
     return Response(status=200)
 
+    
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
@@ -74,7 +78,7 @@ def save_data_juegos(): #Datos para enviar :
         'IsMinor': [is_minor],
         'PassengerId': [1001]
     }
-    print(f'Datos de juegos: {datos_juegos.items()}')
+    return datos_juegos 
 
 if __name__ == '__main__': 
     app.run(debug = True, host = HOST)
