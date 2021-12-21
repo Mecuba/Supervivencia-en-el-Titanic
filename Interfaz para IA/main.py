@@ -9,7 +9,7 @@ HOST = ""
 app = Flask(__name__)
 
 '''Variables globales: '''
-#Aca se va a guardar los datos recibidos: 
+#Aca se va a guardar los datos recibidos : 
 data_storage = {
     'edad': 30, 
     'pasajero': ['0','0','0'], 
