@@ -2,13 +2,14 @@ from os import name
 from typing import List
 from flask import Flask, render_template, request
 from flask.wrappers import Response
+import pickle
 
 HOST = ""
 
 app = Flask(__name__)
 
 '''Variables globales: '''
-#Aca se va a guardar los datos recividos: 
+#Acá se va a guardar los datos recibidos: 
 data_storage = {
     'edad': 30, 
     'pasajero': ['0','0','0'], 
@@ -23,22 +24,30 @@ LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
 def index(): 
     return render_template('index.html')
 
-@app.route('/llegada_datos', methods=['POST'])
+@app.route('/partida_de_juego', methods=['POST'])
 def llegada_datos():
 
     #Llegada de datos
     valores = request.form.getlist('data[]')
-    #Guarda ls valores en un diccionario: 
+    #Guarda los valores en un diccionario: 
     guardar_variables_diccionario(valores)
 
-    #Los datos se guardan en datos juegos: 
-    datos_juegos = save_data_juegos()
-    print(datos_juegos)
-
+    #Los datos se reasignan para ser compatibles con el modelo predictivo: 
+    jugador = guardar_datos_jugador()
+    print(jugador)
     
-    return Response(status=200)
-
+    #Se predice la supervivencia según los datos recolectados
+    jugador['Survived'] = predecir_supervivencia(jugador)
     
+    if jugador['Survived'] == 1:
+        supervivencia = 'Sí'
+    else:
+        supervivencia = 'No'
+    
+    # return Response(status=200) 
+    # The HTTP Status 200 (OK) status code indicates that the request has been
+    # processed successfully on the server.
+    return '¿Sobrevivirías al accidente del Titanic? {0}'.format(supervivencia)
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
@@ -59,13 +68,14 @@ def guardar_variables_diccionario(valores):
                     else: 
                         data_storage[key][x] = '0'
 
-def save_data_juegos(): #Datos para enviar :
-    if (data_storage['edad'] < 16): 
+def guardar_datos_jugador():
+    #Datos para enviar :
+    if (data_storage['edad'] <= 16): 
         is_minor = '1' 
     else: 
         is_minor = '0'
 
-    datos_juegos = {
+    jugador = {
         'Age': [data_storage['edad']],
         'TravelAlone': [data_storage['viaja_solo']],
         'Pclass_1': [data_storage['pasajero'][0]],
@@ -76,9 +86,18 @@ def save_data_juegos(): #Datos para enviar :
         'Embarked_S': [data_storage['puerto'][2]],
         'Sex_male': [data_storage['sexo']],
         'IsMinor': [is_minor],
-        'PassengerId': [1001]
     }
-    return datos_juegos 
+    return jugador
+
+def predecir_supervivencia(jugador):
+    filename = 'RegLog_model.sav'
+    pickle_in = open(filename, 'rb')
+    loaded_model = pickle.load(pickle_in)
+    Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
+                     'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
+    jugador['Survived'] = loaded_model.predict(jugador[Selected_features])
+  
+    return jugador['Survived']
 
 if __name__ == '__main__': 
     app.run(debug = True, host = HOST)
