@@ -24,7 +24,7 @@ LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
 def index(): 
     return render_template('index.html')
 
-@app.route('/partida_de_juego', methods=['POST'])
+@app.route('/llegada_datos', methods=['POST'])
 def llegada_datos():
 
     #Llegada de datos
@@ -36,6 +36,7 @@ def llegada_datos():
     jugador = guardar_datos_jugador()
     print(jugador)
     
+    
     #Se predice la supervivencia según los datos recolectados
     jugador['Survived'] = predecir_supervivencia(jugador)
     
@@ -44,10 +45,10 @@ def llegada_datos():
     else:
         supervivencia = 'No'
     
-    # return Response(status=200) 
+    return Response(status=200) 
     # The HTTP Status 200 (OK) status code indicates that the request has been
     # processed successfully on the server.
-    return '¿Sobrevivirías al accidente del Titanic? {0}'.format(supervivencia)
+    # return '¿Sobrevivirías al accidente del Titanic? {0}'.format(supervivencia)
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
@@ -92,14 +93,15 @@ def guardar_datos_jugador():
 def predecir_supervivencia(jugador):
     filename = 'RegLog_model.sav'
     pickle_in = open(filename, 'rb')
-    loaded_model = pickle.load(pickle_in)
-    Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
-                     'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
-    jugador['Survived'] = loaded_model.predict(jugador[Selected_features])
+    # loaded_model = pickle.load(pickle_in)
+    #Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
+    #                 'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
+    #jugador['Survived'] = loaded_model.predict(jugador[Selected_features])
   
-    return jugador['Survived']
+    # return jugador['Survived']
+    return pickle_in
 
 if __name__ == '__main__': 
-    app.run(debug = True, host = HOST)
+    app.run(host = HOST)
 
 
