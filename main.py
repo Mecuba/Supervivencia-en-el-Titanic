@@ -35,6 +35,7 @@ def llegada_datos():
     #Los datos se reasignan para ser compatibles con el modelo predictivo: 
     jugador = guardar_datos_jugador()
     print(jugador)
+    print('--------------------------------------------------------------------------')
     
     
     #Se predice la supervivencia según los datos recolectados
@@ -93,13 +94,13 @@ def guardar_datos_jugador():
 def predecir_supervivencia(jugador):
     filename = 'RegLog_model.sav'
     pickle_in = open(filename, 'rb')
-    # loaded_model = pickle.load(pickle_in)
+    loaded_model = pickle.load(pickle_in)
     #Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
-    #                 'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
+    #                'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
     #jugador['Survived'] = loaded_model.predict(jugador[Selected_features])
   
-    # return jugador['Survived']
-    return pickle_in
+    #return jugador['Survived']
+    return loaded_model
 
 if __name__ == '__main__': 
     app.run(host = HOST)
