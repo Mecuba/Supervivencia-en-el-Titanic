@@ -60,22 +60,22 @@ def guardar_variables_diccionario(valores):
             if key == 'edad' or key == 'sexo' or key == 'viaja_solo': 
                 data_storage[key] = val
 
-            #Guarda las demas variables: 
+            #Guarda las demás variables: 
             else: 
                 for x in range(0,len(data_storage[key])): 
                     print(f'x: {x}')
                     print(f'val:{val}')
                     if x == val: 
-                        data_storage[key][x] = '1'
+                        data_storage[key][x] = 1
                     else: 
-                        data_storage[key][x] = '0'
+                        data_storage[key][x] = 0
 
 def guardar_datos_jugador():
     #Datos para enviar :
     if (data_storage['edad'] <= 16): 
-        is_minor = '1' 
+        is_minor = 1 
     else: 
-        is_minor = '0'
+        is_minor = 0
 
     jugador = {
         'Age': [data_storage['edad']],
@@ -95,12 +95,13 @@ def predecir_supervivencia(jugador):
     filename = 'RegLog_model.sav'
     pickle_in = open(filename, 'rb')
     loaded_model = pickle.load(pickle_in)
-    #Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
-    #                'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
+    Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
+                    'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
     #jugador['Survived'] = loaded_model.predict(jugador[Selected_features])
-  
+    
+    return Selected_features
     #return jugador['Survived']
-    return loaded_model
+    #return loaded_model
 
 if __name__ == '__main__': 
     app.run(host = HOST)
