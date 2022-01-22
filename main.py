@@ -3,6 +3,7 @@ from typing import List
 from flask import Flask, render_template, request
 from flask.wrappers import Response
 import pickle
+import pandas as pd
 
 HOST = ""
 
@@ -36,15 +37,17 @@ def llegada_datos():
     jugador = guardar_datos_jugador()
     print(jugador)
     print('--------------------------------------------------------------------------')
-    
+    jugador_pd = pd.DataFrame(jugador)
     
     #Se predice la supervivencia según los datos recolectados
-    jugador['Survived'] = predecir_supervivencia(jugador)
+    jugador_pd['Survived'] = predecir_supervivencia(jugador_pd)
     
-    if jugador['Survived'] == 1:
-        supervivencia = 'Sí'
+    if jugador_pd['Survived'] == 1:
+        #supervivencia = 'Sí'
+        print('Sobrevives')
     else:
-        supervivencia = 'No'
+        #supervivencia = 'No'
+        print('No sobrevives')
     
     return Response(status=200) 
     # The HTTP Status 200 (OK) status code indicates that the request has been
@@ -63,8 +66,8 @@ def guardar_variables_diccionario(valores):
             #Guarda las demás variables: 
             else: 
                 for x in range(0,len(data_storage[key])): 
-                    print(f'x: {x}')
-                    print(f'val:{val}')
+                    #print(f'x: {x}')
+                    #print(f'val:{val}')
                     if x == val: 
                         data_storage[key][x] = 1
                     else: 
@@ -91,17 +94,16 @@ def guardar_datos_jugador():
     }
     return jugador
 
-def predecir_supervivencia(jugador):
+def predecir_supervivencia(jugador_pd):
     filename = 'RegLog_model.sav'
     pickle_in = open(filename, 'rb')
     loaded_model = pickle.load(pickle_in)
     Selected_features = ['Age', 'TravelAlone', 'Pclass_1', 'Pclass_2', 
                     'Embarked_C','Embarked_S', 'Sex_male', 'IsMinor']
-    #jugador['Survived'] = loaded_model.predict(jugador[Selected_features])
-    
-    return Selected_features
-    #return jugador['Survived']
-    #return loaded_model
+    jugador_pd['Survived'] = loaded_model.predict(jugador_pd[Selected_features])
+
+    #return Selected_features
+    return jugador_pd['Survived']
 
 if __name__ == '__main__': 
     app.run(host = HOST)
