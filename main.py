@@ -42,7 +42,7 @@ def llegada_datos():
     #Se predice la supervivencia según los datos recolectados
     jugador_pd['Survived'] = predecir_supervivencia(jugador_pd)
     
-    if jugador_pd['Survived'] == 1:
+    if jugador_pd['Survived'][0] == 1:
         #supervivencia = 'Sí'
         print('Sobrevives')
     else:
