@@ -43,13 +43,14 @@ def llegada_datos():
     jugador_pd['Survived'] = predecir_supervivencia(jugador_pd)
     
     if jugador_pd['Survived'][0] == 1:
-        #supervivencia = 'Sí'
+        supervivencia = 'Sí'
         print('Sobrevives')
     else:
-        #supervivencia = 'No'
+        supervivencia = 'No'
         print('No sobrevives')
     
-    return Response(status=200) 
+    # return Response(status=200) 
+    return render_template('index.html', sobrevives=supervivencia)
     # The HTTP Status 200 (OK) status code indicates that the request has been
     # processed successfully on the server.
     # return '¿Sobrevivirías al accidente del Titanic? {0}'.format(supervivencia)
