@@ -36,7 +36,7 @@ $(document).ready(function () {
             data_list = [edad, clase, viaja_solo, puerto, sexo]
             $.ajax({
                 type: "POST",
-                url: "/llegada_datos",
+                url: "/prediccion",
                 data: {
                     data: data_list
                 },

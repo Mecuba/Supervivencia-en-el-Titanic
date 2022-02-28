@@ -45,17 +45,13 @@ def prediccion():
     jugador_pd['Survived'] = predecir_supervivencia(jugador_pd)
     
     if jugador_pd['Survived'][0] == 1:
-        sobrevives = 'Sí'
+        supervivencia = '¡Qué suerte, has sobrevivido!'
         print('Sobrevives')
     else:
-        sobrevives = 'No'
+        supervivencia = 'Ahora tu cadáver yace en el fondo del mar...'
         print('No sobrevives')
     
-    #return Response(status=200) 
-    return render_template("prediccion.html", sobrevives = sobrevives)
-    # The HTTP Status 200 (OK) status code indicates that the request has been
-    # processed successfully on the server.
-    # return '¿Sobrevivirías al accidente del Titanic? {0}'.format(supervivencia)
+    return render_template("prediccion.html", supervivencia = supervivencia)
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
