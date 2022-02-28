@@ -19,20 +19,22 @@ data_storage = {
     'sexo': '0', #0 -> Mujer
 }
 
+
 LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
 
 @app.route('/')
 def index(): 
     return render_template('index.html')
 
-@app.route('/llegada_datos', methods=['POST'])
-def llegada_datos():
-
+@app.route('/prediccion', methods=['POST'])
+def prediccion():
+    global sobrevives
     #Llegada de datos
     valores = request.form.getlist('data[]')
     #Guarda los valores en un diccionario: 
     guardar_variables_diccionario(valores)
 
+   
     #Los datos se reasignan para ser compatibles con el modelo predictivo: 
     jugador = guardar_datos_jugador()
     print(jugador)
@@ -43,14 +45,14 @@ def llegada_datos():
     jugador_pd['Survived'] = predecir_supervivencia(jugador_pd)
     
     if jugador_pd['Survived'][0] == 1:
-        supervivencia = 'Sí'
+        sobrevives = 'Sí'
         print('Sobrevives')
     else:
-        supervivencia = 'No'
+        sobrevives = 'No'
         print('No sobrevives')
     
-    # return Response(status=200) 
-    return render_template('index.html', sobrevives=supervivencia)
+    #return Response(status=200) 
+    return render_template("prediccion.html", sobrevives = sobrevives)
     # The HTTP Status 200 (OK) status code indicates that the request has been
     # processed successfully on the server.
     # return '¿Sobrevivirías al accidente del Titanic? {0}'.format(supervivencia)

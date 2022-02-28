@@ -14,6 +14,7 @@
 </head>
 
 <body class="Body">
+   
     <!-- Edad -->
     <div class="row mb-3">
         <div class="col-auto">
@@ -79,16 +80,12 @@
 
     <!-- Submit button -->
     <div class="col">
-        <button type="submit" class="btn btn-primary" id="Submit"> Enviar </button>
-
-        <div class="overlay">
-            <div class="popup">
-                <a href="#" id="btn-cerrar-popup" class="btn-cerrar-popup"><i class="fas fa-times"></i></a>
-                <h3>¿Sobrevivirías al accidente del Titanic?</h3>
-                <p>{{ sobrevives }}</p>
-            </div>
-        </div>
-
+        
+        
+        <form action="/prediccion" method="post">
+            <button type="submit" class="btn btn-primary" id="Submit"> Enviar </button>
+        </form>
+       
     </div>
 
 </body>
