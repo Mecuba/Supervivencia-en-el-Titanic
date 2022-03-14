@@ -44,14 +44,10 @@ def prediccion():
     #Se predice la supervivencia según los datos recolectados
     jugador_pd['Survived'] = predecir_supervivencia(jugador_pd)
     
-    if jugador_pd['Survived'][0] == 1:
-        supervivencia = '¡Qué suerte, has sobrevivido!'
-        print('Sobrevives')
-    else:
-        supervivencia = 'Ahora tu cadáver yace en el fondo del mar...'
-        print('No sobrevives')
+    #Se redacta una historia según los datos que se ingresan al predictor y su resultado
+    historia = redactar_historia(jugador_pd)
     
-    return render_template("prediccion.html", supervivencia = supervivencia)
+    return render_template("prediccion.html", historia = historia)
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
@@ -103,6 +99,79 @@ def predecir_supervivencia(jugador_pd):
 
     #return Selected_features
     return jugador_pd['Survived']
+
+def redactar_historia(jugador_pd):
+    historia = ['supervivencia','edad','sexo','compañía','puerto','clase']
+#-- ¿Sobreviviste?
+    if jugador_pd['Survived'][0] == 1:
+        historia[0] = '¡Qué suerte, has sobrevivido!'
+#------- ¿Cómo influyó tu edad?
+        if jugador_pd['Age'][0] < 16:
+            historia[1] = 'Quizá el terror a pasado ahora que descansas en el bote pero ¿cómo será posible olvidar todos esos gritos?'
+        elif jugador_pd['Age'][0] < 40:
+            historia[1] = 'Con la fuerza de tu edad sí que has logrado salir airoso de tremendo lío.'
+        elif jugador_pd['Age'][0] < 70:
+            historia[1] = 'Algo de experiencia en situaciones de riesgo te ha salvado esta ocasión.'
+        else:
+            historia[1] = 'Demasiada suerte para ser un anciano. Quizá esas caminatas por la tarde han ayudado de algo.'
+#------- ¿Cómo influyó el sexo?
+        if jugador_pd['Sex_male'][0] == 1:
+            historia[2] = '¿Te has colado al bote salvavidas? ¿en serio? Qué suerte, eh.'
+        else:
+            historia[2] = 'Has luchado bien contra ese oportunista y recuperado el bote para todas esas madres y niños, que no digan que eres el sexo débil'
+#------- ¿Cómo influyó ir acompañado o no?
+        if jugador_pd['TravelAlone'][0] == 1:
+            historia[3] = 'Es bien sabido que estando solo resulta más fácil moverse, estás por tu cuenta y no debes preocuparte por nadie.'
+        else:
+            historia[3] = 'La compañía siempre es buena, sobretodo cuando se queda atascada la puerta del dormitorio y alguien va a salvarte porque recordó que estabas ahí.'
+#------- ¿Cómo influyó el puerto de embarcación?
+        if jugador_pd['Embarked_C'][0] == 1:
+            historia[4] = 'Oh'
+        elif jugador_pd['Embarked_S'][0] == 1:
+            historia[4] = 'Ahhh'
+        else:
+            historia[4] = 'Perro'
+#------- ¿Cómo influyó la clase de pasajero?
+        if jugador_pd['Pclass_1'][0] == 1:
+            historia[5] = 'Oh'
+        elif jugador_pd['Pclass_2'][0] == 1:
+            historia[5] = 'Ahhh'
+        else:
+            historia[5] = 'Perro'
+#-- ¿Sobreviviste?
+    else:
+        historia[0] = 'Ahora tu cadáver yace en el fondo del mar...'
+#------- ¿Cómo influyó tu edad?
+        if jugador_pd['Age'][0] < 16:
+            historia[1] = 'Tan pequeño, un mundo inmenso que ya no alcanzarás a conocer.'
+        elif jugador_pd['Age'][0] < 40:
+            historia[1] = 'La muerte toma a aquellos que quizá menos se lo merecen.'
+        elif jugador_pd['Age'][0] < 70:
+            historia[1] = 'Una persona que al menos ya había disfrutado su vida'
+        else:
+            historia[1] = 'Bueno... ¿qué podría esperarse de un anciano?'
+#------- ¿Cómo influyó el sexo?
+        historia[2] = 'De un modo u otro estarás en la memoria de aquellos que lograste ayudar a escapar, tienes merecido un descanso eterno'
+#------- ¿Cómo influyó ir acompañado o no?
+        if jugador_pd['TravelAlone'][0] == 1:
+            historia[3] = 'Pero es triste ¿no? Que nadie sepa que quedaste atrapado en el baño luego, que nadie te salve...'
+        else:
+            historia[3] = 'Descansa, tu familia está a salvo gracias a ti. Es un sacrificio que vale la pena y tus amados le recordarán.'
+#------- ¿Cómo influyó el puerto de embarcación?
+        if jugador_pd['Embarked_C'][0] == 1:
+            historia[4] = 'Oh'
+        elif jugador_pd['Embarked_S'][0] == 1:
+            historia[4] = 'Ahhh'
+        else:
+            historia[4] = 'Perro'
+#------- ¿Cómo influyó la clase de pasajero?
+        if jugador_pd['Pclass_1'][0] == 1:
+            historia[5] = 'Oh'
+        elif jugador_pd['Pclass_2'][0] == 1:
+            historia[5] = 'Ahhh'
+        else:
+            historia[5] = 'Perro'
+    return historia
 
 if __name__ == '__main__': 
     app.run(host = HOST)
