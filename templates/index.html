@@ -14,22 +14,46 @@
 </head>
 
 <body class="Body">
-   
+    <h1>
+        Supervivencia abordo del Titanic
+    </h1>
+    
+    <!-- Instrucciones de juego-->
+    <p>
+        ¡Ahoy, internauta! Comienza este viaje a bordo de una Inteligencia Artificial y reflexiona sobre la pregunta:
+    </p>
+    <h3>
+        ¿Sobrevivirías al accidente del Titanic?
+    </h3>
+    <p>
+        En este pequeña plataforma podrás expermientar el accidente del Titanic que ocurrió hace ya más de un siglo y comprobar
+        si hubieras terminado en lo más profundo del mar o salido airoso de tremenda catástrofe donde fallecieron al rededor de
+        1500 pasajeros.
+        
+        Este predictor web está basado en una Inteligencia Artificial y necesita conocer algunos datos para determinar la
+        supervivencia, así que bastará con completar el siguiente formulario y abordar tu destino en el Titanic.
+        
+        ¡Suerte, marinero!
+    </p>
+
+    <h3>
+        Taquilla.
+    </h3>
     <!-- Edad -->
     <div class="row mb-3">
         <div class="col-auto">
-            <label class="encabezado"> Edad (años) </label>
+            <label class="encabezado"> ¿Qué edad tienes (en años)? </label>
             <form class="col-auto">
                 <input type="number" class="form-control" value="30" id="edad" >
             </form>
         </div>
         <!-- Viajas solo -->
         <div class="col-auto">
-            <label class="encabezado"> ¿Viajas solo? </label>
+            <label class="encabezado"> ¿Viajarás sol@ o acompañad@? </label>
             <div class="col">
                 <select class="form-select" aria-label="Default select example" id="viaje">
-                    <option value="0">No</option>
-                    <option value="1">Sí</option>
+                    <option value="0">Acompañad@</option>
+                    <option value="1">Sol@</option>
                 </select>
             </div>
         </div>
@@ -52,7 +76,7 @@
     <!-- Clase de pasajero -->
     <div class="row mb-3"></div>
     <div class="row mb-3">
-        <label class="encabezado"> ¿Clase de pasajero? </label>
+        <label class="encabezado"> ¿Qué clase de boleto de pasajero deseas adquirir? </label>
     </div>
     <div class="row mb-3">
         <div class="col-sm-10">
@@ -66,14 +90,14 @@
 
     <!-- Puerto -->
     <div class="row mb-3">
-        <label class="encabezado"> ¿De que puerto? </label>
+        <label class="encabezado"> Selecciona el puerto del cual deseas partir </label>
     </div>
     <div class="row mb-3">
         <div class="col-sm-10">
             <select class="form-select" aria-label="Default select example" id="puerto">
-                <option value="0">Puerto de Acapulco / México</option>
-                <option value="1">Muelle Adossat / España</option>
-                <option value="2">Marina Bay / Singapur</option>
+                <option value="0">Cherburgo / Francia</option>
+                <option value="1">Queenstown / Irlanda</option>
+                <option value="2">Southampton / Inglaterra</option>
             </select>
         </div>
     </div>
@@ -82,7 +106,7 @@
     <div class="col">
         
         <form action="/prediccion" method="post">
-            <button type="submit" class="btn btn-primary" id="Submit"> Enviar </button>
+            <button type="submit" class="btn btn-primary" id="Submit">¡Zarpamos!</button>
         </form>
        
     </div>
