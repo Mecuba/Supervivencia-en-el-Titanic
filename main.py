@@ -14,9 +14,9 @@ app = Flask(__name__)
 data_storage = {
     'edad': 30, 
     'pasajero': ['0','0','0'], 
-    'viaja_solo': '0', #0 -> no 
+    'viaja_solo': '0', #0 = No
     'puerto': ['0','0','0'],
-    'sexo': '0', #0 -> Mujer
+    'sexo': '0', #0 = Mujer
 }
 
 
