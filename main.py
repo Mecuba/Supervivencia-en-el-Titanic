@@ -46,16 +46,7 @@ def prediccion():
     #Se redacta una historia según los datos que se ingresan al predictor y su resultado
     historia = redactar_historia(jugador_pd)
     
-<<<<<<< HEAD
-    #return Response(status=200) 
-    return render_template("prediccion.html", sobrevives = sobrevives)
-
-
-
-
-=======
     return render_template("prediccion.html", historia = historia)
->>>>>>> 2c422d29ad30440be46987d239844dee2ed872cd
 
 '''Funciones '''
 def guardar_variables_diccionario(valores): 
