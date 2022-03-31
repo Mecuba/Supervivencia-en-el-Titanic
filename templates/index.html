@@ -14,22 +14,47 @@
 </head>
 
 <body class="Body">
-   
+    <h1>
+        Supervivencia abordo del Titanic
+    </h1>
+    
+    <!-- Instrucciones de juego-->
+    <p>
+        ¡Ahoy, internauta! Comienza este viaje a bordo de una Inteligencia Artificial y reflexiona sobre la pregunta:
+    </p>
+    <h3>
+        ¿Sobrevivirías al accidente del Titanic?
+    </h3>
+    <p>
+        En este pequeña plataforma podrás expermientar el accidente del Titanic que ocurrió hace ya más de un siglo y comprobar
+        si hubieras terminado en lo más profundo del mar o salido airoso de tremenda catástrofe donde fallecieron alrededor de
+        1500 pasajeros.
+        
+        Este predictor web está basado en una Inteligencia Artificial y necesita conocer algunos datos para determinar tu
+        supervivencia, así que bastará con completar el siguiente formulario y abordar tu destino en el Titanic. Algunas de estas
+        preguntas no piden directamente los datos, sino otros que están relacionados.
+        
+        ¡Suerte, marinero!
+    </p>
+
+    <h3>
+        Taquilla.
+    </h3>
     <!-- Edad -->
     <div class="row mb-3">
         <div class="col-auto">
-            <label class="encabezado"> Edad (años) </label>
+            <label class="encabezado"> ¿Qué edad tienes (en años)? </label>
             <form class="col-auto">
                 <input type="number" class="form-control" value="30" id="edad" >
             </form>
         </div>
         <!-- Viajas solo -->
         <div class="col-auto">
-            <label class="encabezado"> ¿Viajas solo? </label>
+            <label class="encabezado"> ¿Actualmente tienes pareja sentimental? :3 </label>
             <div class="col">
                 <select class="form-select" aria-label="Default select example" id="viaje">
-                    <option value="0">No</option>
-                    <option value="1">Si</option>
+                    <option value="0">Sí</option>
+                    <option value="1">No</option>
                 </select>
             </div>
         </div>
@@ -38,8 +63,8 @@
             <label class="encabezado"> Sexo: </label>
                 <div class="col">
                     <select class="form-select" aria-label="Default select example" id="sexo">
-                        <option value="0">Minita</option>
-                        <option value="1">Pibe</option>
+                        <option value="0">Mujer</option>
+                        <option value="1">Hombre</option>
                     </select>
                 </div>
             
@@ -52,36 +77,40 @@
     <!-- Clase de pasajero -->
     <div class="row mb-3"></div>
     <div class="row mb-3">
-        <label class="encabezado"> ¿Clase de pasajero? </label>
+        <label class="encabezado"> ¿Cómo sueles ver películas? </label>
     </div>
     <div class="row mb-3">
         <div class="col-sm-10">
             <select class="form-select" aria-label="Default select example" id="clase">
-                <option value="0">One</option>
-                <option value="1">Two</option>
-                <option value="2">Three</option>
+                <option value="0">Voy al cine cada ocho días y compro en dulcería B)</option>
+                <option value="1">Veo pelis en Netflix :) </option>
+                <option value="2">Bajo películas de Cuevana :p </option>
             </select>
         </div>
     </div>
 
     <!-- Puerto -->
     <div class="row mb-3">
-        <label class="encabezado"> ¿De que puerto? </label>
+        <label class="encabezado"> ¿Qué idiomas sabes hablar? </label>
     </div>
     <div class="row mb-3">
         <div class="col-sm-10">
             <select class="form-select" aria-label="Default select example" id="puerto">
-                <option value="0">Veracruz c:</option>
-                <option value="1">Acapulco :u</option>
-                <option value="2">NO C</option>
+                <option value="0">Francés</option>
+                <option value="1">Inglés y me gusta la cerveza :p</option>
+                <option value="2">Inglés y me gusta el té :)</option>
             </select>
         </div>
     </div>
 
     <!-- Submit button -->
     <div class="col">
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 2c422d29ad30440be46987d239844dee2ed872cd
         <form action="/prediccion" method="post">
-            <button type="submit" class="btn btn-primary" id="Submit"> Enviar </button>
+            <button type="submit" class="btn btn-primary" id="Submit">¡Zarpamos!</button>
         </form>
        
     </div>

@@ -20,15 +20,15 @@ $(document).ready(function () {
         //Condiciones de edad: 
 
         if (edad < 0 ){ 
-            window.alert('a')
+            window.alert('Los bebés no nacidos no se cuentan como pasajeros :)')
         }
         //Muy joven
-        if (edad < 9 && viaja_solo == '1'){
-            window.alert('*Lo detienen en la entrad* ')
+        if (edad < 16 && viaja_solo == '1'){
+            window.alert('Niño, no podemos dejarte subir al barco sin acompañante')
         }
         //Demasiado viejo
         else if(edad > 122){
-            window.alert('Eres el man más viejo del mundo, el viaje es muy duro para tí :c')
+            window.alert('Vaya, sí que eres viejo, el viaje será muy duro para ti :(')
         }
         
         else{
@@ -36,7 +36,7 @@ $(document).ready(function () {
             data_list = [edad, clase, viaja_solo, puerto, sexo]
             $.ajax({
                 type: "POST",
-                url: "/llegada_datos",
+                url: "/prediccion",
                 data: {
                     data: data_list
                 },
