@@ -2,6 +2,7 @@ from os import name
 from typing import List
 from flask import Flask, render_template, request
 from flask.wrappers import Response
+import pickle
 import pandas as pd
 
 HOST = ""
@@ -172,6 +173,6 @@ def redactar_historia(jugador_pd):
     return historia
 
 if __name__ == '__main__': 
-    app.run(host = HOST, debug = True) #mi ip: "192.168.100.102" BORRAR LUEGO aaa
+    app.run(host = HOST, debug = True)
 
 
