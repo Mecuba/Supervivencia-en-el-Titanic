@@ -19,7 +19,6 @@ data_storage = {
     'sexo': '0', #0 = Mujer
 }
 
-
 LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
 
 @app.route('/')
@@ -28,13 +27,13 @@ def index():
 
 @app.route('/prediccion', methods=['POST'])
 def prediccion():
-    global sobrevives
+
     #Llegada de datos
     valores = request.form.getlist('data[]')
     #Guarda los valores en un diccionario: 
     guardar_variables_diccionario(valores)
 
-   
+
     #Los datos se reasignan para ser compatibles con el modelo predictivo: 
     jugador = guardar_datos_jugador()
     print(jugador)
@@ -174,6 +173,6 @@ def redactar_historia(jugador_pd):
     return historia
 
 if __name__ == '__main__': 
-    app.run(host = HOST)
+    app.run(host = HOST, debug = True)
 
 
