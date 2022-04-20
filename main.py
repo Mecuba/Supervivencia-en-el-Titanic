@@ -134,47 +134,52 @@ def predecir_supervivencia(pasajero, modelo):
 def redactar_historia(pasajero):
     pasajero_historia = ['edad','clase','sexo','compañía','puerto','supervivencia']
 
-#-- ¿Cómo influyó tu edad?
-    if pasajero['Age'][0] < 18:
-        pasajero_historia[0] = historia_edad[random.randint(0,1)]
-    elif pasajero['Age'][0] < 79:
-        pasajero_historia[0] = historia_edad[2 + random.randint(0,2)]
-    else:
-        pasajero_historia[0] = historia_edad[5 + random.randint(0,1)]
+    # Easter Egg !!!
+    if pasajero['Age'][0] == 33 and pasajero['Pclass_2'][0] == 1 and pasajero['Sex_male'][0] == 1 and pasajero['TravelAlone'][0] == 1 and pasajero['Embarked_S'][0] == 1 and pasajero['Survived'][0] == 0:
+        pasajero_historia = ['---','---','---','---','---','No, mueres por feo xDxDxdxd --- --- --- --- ---']
+    # Casos normales
+    else:        
+    #-- ¿Cómo influyó tu edad?
+        if pasajero['Age'][0] < 18:
+            pasajero_historia[0] = historia_edad[random.randint(0,1)]
+        elif pasajero['Age'][0] < 79:
+            pasajero_historia[0] = historia_edad[2 + random.randint(0,2)]
+        else:
+            pasajero_historia[0] = historia_edad[5 + random.randint(0,1)]
 
-#-- ¿Cómo influyó la clase de pasajero?
-    if pasajero['Pclass_1'][0] == 1:
-        pasajero_historia[1] = historia_clase[random.randint(0,1)]
-    elif pasajero['Pclass_2'][0] == 1:
-        pasajero_historia[1] = historia_clase[2 + random.randint(0,1)]
-    else:
-        pasajero_historia[1] = historia_clase[4 + random.randint(0,1)]
+    #-- ¿Cómo influyó la clase de pasajero?
+        if pasajero['Pclass_1'][0] == 1:
+            pasajero_historia[1] = historia_clase[random.randint(0,1)]
+        elif pasajero['Pclass_2'][0] == 1:
+            pasajero_historia[1] = historia_clase[2 + random.randint(0,1)]
+        else:
+            pasajero_historia[1] = historia_clase[4 + random.randint(0,1)]
 
-#-- ¿Cómo influyó el sexo?
-    if pasajero['Sex_male'][0] == 1:
-        pasajero_historia[2] = historia_sexo[random.randint(0,1)]
-    else:
-        pasajero_historia[2] = historia_sexo[random.randint(0,1)]
+    #-- ¿Cómo influyó el sexo?
+        if pasajero['Sex_male'][0] == 1:
+            pasajero_historia[2] = historia_sexo[random.randint(0,1)]
+        else:
+            pasajero_historia[2] = historia_sexo[random.randint(0,1)]
 
-#-- ¿Cómo influyó ir acompañado o no?
-    if pasajero['TravelAlone'][0] == 1:
-        pasajero_historia[3] = historia_solo[random.randint(0,1)]
-    else:
-        pasajero_historia[3] = historia_solo[random.randint(0,1)]
+    #-- ¿Cómo influyó ir acompañado o no?
+        if pasajero['TravelAlone'][0] == 1:
+            pasajero_historia[3] = historia_solo[random.randint(0,1)]
+        else:
+            pasajero_historia[3] = historia_solo[random.randint(0,1)]
 
-#-- ¿Cómo influyó el puerto de embarcación?
-    if pasajero['Embarked_C'][0] == 1:
-        pasajero_historia[4] = historia_puerto[random.randint(0,1)]
-    elif pasajero['Embarked_S'][0] == 1:
-        pasajero_historia[4] = historia_puerto[random.randint(0,1)]
-    else:
-        pasajero_historia[4] = historia_puerto[random.randint(0,1)]
+    #-- ¿Cómo influyó el puerto de embarcación?
+        if pasajero['Embarked_C'][0] == 1:
+            pasajero_historia[4] = historia_puerto[random.randint(0,1)]
+        elif pasajero['Embarked_S'][0] == 1:
+            pasajero_historia[4] = historia_puerto[random.randint(0,1)]
+        else:
+            pasajero_historia[4] = historia_puerto[random.randint(0,1)]
 
-#-- ¿Sobreviviste?
-    if pasajero['Survived'][0] == 1:
-        pasajero_historia[5] = historia_supervivencia[random.randint(0,1)]
-    else:
-        pasajero_historia[5] = historia_supervivencia[random.randint(0,1)]
+    #-- ¿Sobreviviste?
+        if pasajero['Survived'][0] == 1:
+            pasajero_historia[5] = historia_supervivencia[random.randint(0,1)]
+        else:
+            pasajero_historia[5] = historia_supervivencia[random.randint(0,1)]
 
     return pasajero_historia
 
