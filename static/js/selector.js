@@ -24,7 +24,7 @@ $(document).ready(function () {
         }
         //Muy joven
         if (edad < 16 && viaja_solo == '1'){
-            window.alert('Niño, no podemos dejarte subir al barco sin acompañante')
+            window.alert('Niño, eres muy pequeño para viajar sin acompañante')
         }
         //Demasiado viejo
         else if(edad > 122){

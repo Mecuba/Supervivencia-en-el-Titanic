@@ -36,9 +36,10 @@
 
 p{
     font-size: medium;
-    padding: 1vh 1vh 0 1vh;
+    /*padding: 1vh 1vh 0 1vh;*/
     font-weight: 500;
     display: flex;
     justify-content: center;
+    text-align: justify;
 }
 

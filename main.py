@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 '''Variables globales: '''
 
-#Acá se va a guardar los datos recibidos: 
+#Acá se van a guardar los datos recibidos: 
 data_storage = {
     'edad': 30, 
     'pasajero': ['0','0','0'], 
@@ -185,5 +185,3 @@ def redactar_historia(pasajero):
 
 if __name__ == '__main__': 
     app.run(host = HOST, debug = True)
-
-
