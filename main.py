@@ -5,6 +5,7 @@ from flask.wrappers import Response
 import pickle
 import pandas as pd
 import random
+from django.shortcuts import redirect
 
 HOST = ""
 
@@ -44,10 +45,17 @@ historia_clase =[  # Primera clase
                 'Mientras guardas un pan extra en tu bolsillo pensando en que será un rico desayuno para mañana, avanzas por el pasillo.'
                 ]
 
-historia_sexo = ['Escuchas que gritan "mujeres y niños primero" y, mientras piensas que eso es muy retrógrada, sigues a todos hacia los botes salvavidas.',
-                    '--Dogglo vacío--']
+historia_sexo = ['Escuchas que gritan "mujeres y niños primero" y, mientras piensas que eso es muy retrógrada, sigues a todos hacia los botes salvavidas.']
 
-historia_puerto = ['--Dogglo vacío--','--Dogglo vacío--']
+historia_puerto = [ # Francia
+                'Oh là là, siendo francés piensas en que sería más fácil decidir quién sube a los botes salvavidas si tuvieran una guillatina a la mano. C´est dommage. Alzas tu puño y saltas a luchar por tu libertad.',
+                'Recordando el deseo de la liberté que corre por tu sangre francesa, tientas con la idea de luchar por tu lugar en el bote salvavidas en vez de esperar "civilizadamente" como el demás rebaño de ovejas hace.',
+                    # Inglaterra
+                'Como buen inglés, piensas que este sería un buen momento para una taza de té. Mientras, sigues empujando para ver si logras subir a algún bote salvavidas.',
+                'Considerando el clima de tu amada Inglaterra, piensas en que el agua del mar podría no estar taaan fría, y consideras detenidamente en saltar en vez de esperar en la fila para un bote salvavidas.',
+                    # Irlanda
+                'Ver a la gente empujándose para subir a los botes te recuerda al ambiente de las tabernas irlandesas. Oh hogar, dulce hogar. Piensas mientras golpeas a alguien e intentas lanzarte al bote más cercano.'   
+                ]
 
 historia_solo = ['--Dogglo vacío--','--Dogglo vacío--']
 
@@ -132,11 +140,11 @@ def predecir_supervivencia(pasajero, modelo):
     return pasajero['Survived']
 
 def redactar_historia(pasajero):
-    pasajero_historia = ['edad','clase','sexo','compañía','puerto','supervivencia']
+    pasajero_historia = ['edad','clase','sexo','puerto','compañía','supervivencia']
 
     # Easter Egg !!!
-    if pasajero['Age'][0] == 33 and pasajero['Pclass_2'][0] == 1 and pasajero['Sex_male'][0] == 1 and pasajero['TravelAlone'][0] == 1 and pasajero['Embarked_S'][0] == 1 and pasajero['Survived'][0] == 0:
-        pasajero_historia = ['---','---','---','---','---','No, mueres por feo xDxDxdxd --- --- --- --- ---']
+    if pasajero['Age'][0] == 33 and pasajero['Pclass_2'][0] == 1 and pasajero['Sex_male'][0] == 1 and pasajero['TravelAlone'][0] == 1 and pasajero['Embarked_S'][0] == 1:
+        return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
     # Casos normales
     else:        
     #-- ¿Cómo influyó tu edad?
@@ -156,30 +164,27 @@ def redactar_historia(pasajero):
             pasajero_historia[1] = historia_clase[4 + random.randint(0,1)]
 
     #-- ¿Cómo influyó el sexo?
-        if pasajero['Sex_male'][0] == 1:
-            pasajero_historia[2] = historia_sexo[random.randint(0,1)]
-        else:
-            pasajero_historia[2] = historia_sexo[random.randint(0,1)]
-
-    #-- ¿Cómo influyó ir acompañado o no?
-        if pasajero['TravelAlone'][0] == 1:
-            pasajero_historia[3] = historia_solo[random.randint(0,1)]
-        else:
-            pasajero_historia[3] = historia_solo[random.randint(0,1)]
+        pasajero_historia[2] = historia_sexo[0]
 
     #-- ¿Cómo influyó el puerto de embarcación?
         if pasajero['Embarked_C'][0] == 1:
             pasajero_historia[4] = historia_puerto[random.randint(0,1)]
         elif pasajero['Embarked_S'][0] == 1:
-            pasajero_historia[4] = historia_puerto[random.randint(0,1)]
+            pasajero_historia[3] = historia_puerto[2 + random.randint(0,1)]
         else:
-            pasajero_historia[4] = historia_puerto[random.randint(0,1)]
+            pasajero_historia[3] = historia_puerto[4]
+
+    #-- ¿Cómo influyó ir acompañado o no?
+        if pasajero['TravelAlone'][0] == 1:
+            pasajero_historia[4] = historia_solo[random.randint(0,1)]
+        else:
+            pasajero_historia[4] = historia_solo[random.randint(0,1)]
 
     #-- ¿Sobreviviste?
         if pasajero['Survived'][0] == 1:
-            pasajero_historia[5] = historia_supervivencia[random.randint(0,1)]
+            pasajero_historia[5] = historia_supervivencia[0]
         else:
-            pasajero_historia[5] = historia_supervivencia[random.randint(0,1)]
+            pasajero_historia[5] = historia_supervivencia[1]
 
     return pasajero_historia
 
