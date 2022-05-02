@@ -144,7 +144,8 @@ def redactar_historia(pasajero):
 
     # Easter Egg !!!
     if pasajero['Age'][0] == 33 and pasajero['Pclass_2'][0] == 1 and pasajero['Sex_male'][0] == 1 and pasajero['TravelAlone'][0] == 1 and pasajero['Embarked_S'][0] == 1:
-        return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+        pasajero_historia = ['---','---','---','---','---','No, mueres por feo xDxDxdxd --- --- --- --- ---']
+        # return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
     # Casos normales
     else:        
     #-- ¿Cómo influyó tu edad?
