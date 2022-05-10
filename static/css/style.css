@@ -23,6 +23,23 @@
 .encabezado{
     font-size: large;
     margin-left: 0.5em;
-    font-weight: 700;
+    font-weight: 600;
+}
+
+.titulo{
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+p{
+    font-size: medium;
+    /*padding: 1vh 1vh 0 1vh;*/
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    text-align: justify;
 }
 
