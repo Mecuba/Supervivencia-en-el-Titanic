@@ -6,6 +6,7 @@ import pickle
 import pandas as pd
 import random
 #from django.shortcuts import redirect
+#jeje ahora sí xd
 
 HOST = ""
 
