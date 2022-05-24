@@ -28,6 +28,7 @@ Donde `my-venv` es el nombre del entorno virtual. Con ello se estaría creado el
 ```
 source my-venv/Scripts/activate
 ```
+
 > No usar un entorno virtual para el proyecto que sea que se esté desarrollando, puede desembocar en errores por las versiones de las librerías que se requieren en el proyecto, pero no indicarán directamente un problema con el entorno de Python en el que se está trabajando.
 
 Un último paso, al menos usando **Visual Studio Code** y si es que no se realiza en automático, es la selección del intérprete de Python que está dentro del entorno virtual, no el que está instalado de manera global. Para esto, en la paleta de comandos (`Ctrl+Shift+P`) se debe usar la instrucción `Python: Select Interpreter` la cual desplegará una lista de intérpretes y deberá seleccionarse aquel dentro del entorno virtual. Según el editor de código o IDE que se esté utilizando esto puede cambiar, por lo que estos pasos solo son aplicables en [Visual Studio Code](https://code.visualstudio.com/docs/python/environments), en cuyo link se describe más a detalle la creación de entornos virtuales.
@@ -40,12 +41,20 @@ Un último paso, al menos usando **Visual Studio Code** y si es que no se realiz
 ## Importación del modelo predictivo
 Dentro de este repositorio se puede encontrar el modelo predictivo, el cual anteriormente fue exportado desde nuestro [cuaderno](https://colab.research.google.com/drive/1Ww9WhgC7N0oYPHkDCjy0ZAHjhRPCOL9E?usp=sharing), lleva por nombre `RegLog_model.sav` y ahora se ocupa para que la aplicación web pueda realizar las predicciones. Esto se logra importándolo con unas cuantas líneas, pero primero se debe importar la librería `pickle`, si no se encuentra instalada, se logra escribiendo `pip install pickle` en la terminal dentro de la carpeta del proyecto con el entorno virtual activo. Con la paquetería ya en el entorno, se manda a llamar dentro del archivo Python con `import pickle`.
 
-> Uno de los errores que se presentaron al tratar de usar `pickle` fue:
+```
+filename = 'NombreDelModelo.extension'
+pickle_input = open(filename, 'rb')
+modelo_predictivo = pickle.load(pickle_input)
+```
 
+De este modo se logra importar el modelo si se encuentra en la raíz del proyecto. De encontrarse en algún subfolder, es importante especificar la dirección en la variable `filename`.
+
+> Uno de los errores que se presentaron al tratar de usar `pickle` fue:
 > ```
 > UserWarning: Trying to unpickle estimator ( ) from version 1.0.1 when using version 1.0.2
 > ```
-
 > Pero fue corregido reinstalando `scikit learn` con la `versión 1.0.1` para que pudiera extraer correctamente el modelo predictivo.
 
 Si deseas más información al respecto no dudes en escribirnos a: contacto.mecuba@gmail.com
+
+## 
