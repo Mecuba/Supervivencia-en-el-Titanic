@@ -11,19 +11,19 @@ Suele ser común necesitar versiones específicas de ciertas librerías para que
 
   La creación de un entorno virtual o *venv* se sugiere como uno de los primeros pasos en el desarrollo de un proyecto, pero no hay problema con crearlo cuando ya se va a mitad de camino. Estos es aplicable independientemente del editor de código o IDE que se utilice. Lo primero es instalar la herramienta de entornos virtuales con el comando:
 
-```
+```python
 pip install virtualenv
 ```
 
   Tras terminar la instalación se procede a crear el entorno virtual dirigiéndose a la carpeta donde se ubica el proyecto y se ejecuta el comando:
 
-```
+```python
 unidad\carpeta\de\proyecto>python -m venv my-venv
 ```
 
   Donde *my-venv* es el nombre del entorno virtual. Con ello se estaría creado el entorno virtual pero aún queda activarlo para poder empezar a trabajar en él. Para esto se ejecuta:
 
-```
+```python
 source my-venv/Scripts/activate
 ```
 
