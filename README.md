@@ -47,7 +47,7 @@ pickle_input = open(filename, 'rb')
 modelo_predictivo = pickle.load(pickle_input)
 ```
 
-De este modo se logra importar el modelo si se encuentra en la raíz del proyecto. De encontrarse en algún subfolder, es importante especificar la dirección en la variable `filename`.
+De este modo se logra importar el modelo si se encuentra en la raíz del proyecto. De encontrarse en algún subfolder, es importante especificar la dirección: `filename = 'Carpeta/NombreDelModelo.extension'`.
 
 > Uno de los errores que se presentaron al tratar de usar `pickle` fue:
 > ```
