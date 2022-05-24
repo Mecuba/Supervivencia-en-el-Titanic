@@ -88,7 +88,7 @@ def prediccion():
     #Llegada de datos
     valores = request.form.getlist('data[]')
 
-    #Importanción del modelo predictivo
+    #Importación del modelo predictivo
     filename = 'RegLog_model.sav'
     pickle_in = open(filename, 'rb')
     modelo_Titanic = pickle.load(pickle_in)
