@@ -27,6 +27,6 @@ Donde *my-venv* es el nombre del entorno virtual. Con ello se estaría creado el
 source my-venv/Scripts/activate
 ```
 
-Un último paso, al menos usando Visual Studio Code, es que se debe seleccionar el intérprete de Python pero que está dentro del entorno virtual y no el que está instalado de manera global.
+Un último paso, al menos usando [Visual Studio Code](https://code.visualstudio.com/docs/python/environments), es que se debe seleccionar el intérprete de Python pero que está dentro del entorno virtual y no el que está instalado de manera global.
 
   Si deseas más información al respecto no dudes en escribirnos a: contacto.mecuba@gmail.com
