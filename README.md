@@ -20,7 +20,7 @@ pip install virtualenv
 Tras terminar la instalación se procede a crear el entorno virtual dirigiéndose a la carpeta donde se ubica el proyecto y se ejecuta el comando:
 
 ```
-unidad\carpeta\de\proyecto>python -m venv my-venv
+\carpeta\de\proyecto>python -m venv my-venv
 ```
 
 Donde `my-venv` es el nombre del entorno virtual. Con ello se estaría creado el entorno virtual pero aún queda activarlo para poder empezar a trabajar en él. Para esto se ejecuta:
@@ -42,9 +42,9 @@ Un último paso, al menos usando **Visual Studio Code** y si es que no se realiz
 Dentro de este repositorio se puede encontrar el modelo predictivo, el cual anteriormente fue exportado desde nuestro [cuaderno](https://colab.research.google.com/drive/1Ww9WhgC7N0oYPHkDCjy0ZAHjhRPCOL9E?usp=sharing), lleva por nombre `RegLog_model.sav` y ahora se ocupa para que la aplicación web pueda realizar las predicciones. Esto se logra importándolo con unas cuantas líneas, pero primero se debe importar la librería `pickle`, si no se encuentra instalada, se logra escribiendo `pip install pickle` en la terminal dentro de la carpeta del proyecto con el entorno virtual activo. Con la paquetería ya en el entorno, se manda a llamar dentro del archivo Python con `import pickle`.
 
 ```
-filename = 'NombreDelModelo.extension'
+filename = '*modelName*.extension'
 pickle_input = open(filename, 'rb')
-modelo_predictivo = pickle.load(pickle_input)
+model = pickle.load(pickle_input)
 ```
 
 De este modo se logra importar el modelo si se encuentra en la raíz del proyecto. De encontrarse en algún subfolder, es importante especificar la dirección: `filename = 'Carpeta/NombreDelModelo.extension'`.
@@ -55,6 +55,38 @@ De este modo se logra importar el modelo si se encuentra en la raíz del proyect
 > ```
 > Pero fue corregido reinstalando `scikit learn` con la `versión 1.0.1` para que pudiera extraer correctamente el modelo predictivo.
 
-Si deseas más información al respecto no dudes en escribirnos a: contacto.mecuba@gmail.com
+> Es importante reconcoer la forma en que el modelo logra la predicción: el tipo de datos que necesita de entrada para evaluar y el tipo de datos que regresa. Por ejemplo, en este caso el modelo necesita que los datos estén organizados en un dataFrame de Pandas, así que basta con importar la librería: `import pandas as pd`.
 
-## 
+## Servidor para la App Web: Heroku
+Se seleccionó [Heroku](https://www.heroku.com/platform) como servidor para que esta App Web estuviera disponible en internet. Antes de subir el proyecto a esta plataforma (siendo similar a subirlo a Github), se deben crear algunos archivos como el `requirements.txt`:
+
+```
+pip freeze > requirements.txt
+```
+
+Donde se especificarán cada una de las librerías y versiones correspondientes que se encuentran instaladas en el entorno virtual y que se está ocupando actualmente en el proyecto.
+
+> Algunas de estas librerías pueden no ser declaradas explícitamente en el código Python causando confusión sobre si son necesarias o no, pero muchas de ellas son librerías que se requieren para que otras puedan trabajar correctamente. Como sucede con `itsdangerous`,`Jinja2` y `Wearkzeug`, que son librerías fundamentales para `Flask`.
+
+`Procfile` es un archivo donde básicamente se le indica a Heroku cómo debe correr el proyecto. En Visual Studio Code puede resultar bastante fácil crearlo: basta con añadir un nuevo archivo a la carpeta del proyecto, nombrarlo exactamente como `Procfile` y en él escribir la siguiente línea:
+
+```
+web: gunicorn *AppName*:app
+```
+
+> Es importante haber instalado gunicorn en el entorno virtual: `pip install gunicorn` y que haya quedado declarado en `requirements.txt`, de otro modo, al intentar subir el proyecto a Heroku arrojará un error: `bash gunicorn command not found`.
+
+Con estos archivos preparados, es posible comezar con la subida a Heroku, primero creando una cuenta en la plataforma y luego ejecutando los siguientes comandos (puede ser desde el CMD):
+
+1. `heroku login` desde el directorio por default cuando se abre CMD
+2. Dirigirse a la ubicación de la App, con `cd carpeta\donde\se\encuentra\la\App`
+3. Si no se ha inicializado un repositorio, ejecutar `git init`
+4. Ejecutar `heroku git:remote -a *nombre-de-app*`, donde `*nombre-de-app*` es el nombre de la aplicación asignado desde Heroku.
+5. Ejecutar `git add .` para agregar los cambios en el repositorio
+6. `git commit -m "Update App"` para definir el nombre del cambio
+7. Ejecutar `git push heroku main`.
+
+> El **comando 7** hace referencia al *branch* en el que la aplicación debe estar completamente actualizada (si es que se está trabajando en repositorios de Github con múltiples *branches*), pero puede suceder que la versión más reciente del proyecto esté en un *branch* diferente. Así que es preferible actualizar el *branch main* (o en dado caso el *branch master*) para que Heroku pueda aceptar el *push*, si se hace desde el *branch* con nombre distinto a *main* o *master*, Heroku va a ignorar la construcción subiendo únicamente los archivos a un *branch* nuevo, de modo que la app no existirá.
+    
+Si deseas más información al respecto no dudes en escribirnos a: contacto.mecuba@gmail.com
+ 
