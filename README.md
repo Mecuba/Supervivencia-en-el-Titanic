@@ -56,7 +56,7 @@ Sin embargo, prescindir de otras librerías para funcionar no significa que no p
 > ```html
 > <html>
 >     <head>
->         <title>{{ title }} </title>
+>         <title>{{ title }}</title>
 >     </head>
 >     <body>
 >         <h1>Hello {{ username }}</h1>
@@ -64,7 +64,7 @@ Sin embargo, prescindir de otras librerías para funcionar no significa que no p
 > </html>
 > ```
 >
-> Desde el código de Python, es importante agregar un argumento para **pasar** las variables en la función de *flask* que renderiza la página para que el código de HTML entienda de dónde provienen esas variables: `return render_template('pageName.html', variable = variable)`.
+> Desde el código de Python, es importante agregar como argumento las variables en la función de *flask* que renderiza la página para que el código de HTML entienda de dónde provienen esas variables: `return render_template('pageName.html', title = title, username = username)`.
 
 
 ## Importación del modelo predictivo
