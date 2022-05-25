@@ -70,7 +70,7 @@ Sin embargo, prescindir de otras librerías para funcionar no significa que no p
 ## Importación del modelo predictivo
 Dentro de este repositorio se puede encontrar el modelo predictivo, el cual anteriormente fue exportado desde nuestro [cuaderno](https://colab.research.google.com/drive/1Ww9WhgC7N0oYPHkDCjy0ZAHjhRPCOL9E?usp=sharing), lleva por nombre `RegLog_model.sav` y ahora se ocupa para que la aplicación web pueda realizar las predicciones. Esto se logra importándolo con unas cuantas líneas, pero primero se debe importar la librería `pickle`, si no se encuentra instalada, se logra escribiendo `pip install pickle` en la terminal dentro de la carpeta del proyecto con el entorno virtual activo. Con la paquetería ya en el entorno, se manda a llamar dentro del archivo Python con `import pickle`.
 
-```
+```python
 filename = 'modelName.extension'
 pickle_input = open(filename, 'rb')
 model = pickle.load(pickle_input)
