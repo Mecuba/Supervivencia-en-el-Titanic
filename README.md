@@ -36,13 +36,42 @@ Un último paso, al menos usando **Visual Studio Code** y si es que no se realiz
 > Una buena práctica también es crear un archivo `.gitignore` que incluya la carpeta con todos los archivos del entorno virtual, cuya intención es evitar que estos archivos se suban innecesariamente a un repositorio si se trabaja con Git.
 
 ## Uso de Flask para crear una aplicación web
+Flask es un marco de trabajo web para crear aplicaciones web con Python, y descrito como minimalista porque no requiere de otras librerías para funcionar, por lo que la creación de un app web se reduce a un plantilla como la siguiente:
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run()
+```
+Sin embargo, prescindir de otras librerías para funcionar no significa que no pueda complementarse con otras más para extender sus funcionalidades, y queda demostrado en este mismo proyecto.
+
+> Dentro de `@app.route('/')` es posible *retornar* desde simple texto hasta una página completa de **HTML**. Para esto se requiere importar algunas otras funcionalidades de *Flask*, como `render_template`: `from flask import Flask, render_template, request`. Usando la función correspondiente, se puede renderizar una página de HTML cuyo código se encuentre dentro de la carpeta del proyecto, `index.html` es un ejemplo.
+
+> Debido a *Flask*, es posible pasar variables de Python, directamente a HTML. Esto significa que, por ejemplo, se puede *postear* información a través de algún formulario, que esta sea procesada por el código Python y finalmente se puedan mostrar los resultados en HTML insertando las variables entre dos llaves `{{ variable }}`:
+> ```html
+> <html>
+>     <head>
+>         <title>{{ title }} </title>
+>     </head>
+>     <body>
+>         <h1>Hello {{ username }}</h1>
+>     </body>
+> </html>
+> ```
+>
+> Desde el código de Python, es importante agregar un argumento para **pasar** las variables en la función de *flask* que renderiza la página para que el código de HTML entienda de dónde provienen esas variables: `return render_template('pageName.html', variable = variable)`.
 
 
 ## Importación del modelo predictivo
 Dentro de este repositorio se puede encontrar el modelo predictivo, el cual anteriormente fue exportado desde nuestro [cuaderno](https://colab.research.google.com/drive/1Ww9WhgC7N0oYPHkDCjy0ZAHjhRPCOL9E?usp=sharing), lleva por nombre `RegLog_model.sav` y ahora se ocupa para que la aplicación web pueda realizar las predicciones. Esto se logra importándolo con unas cuantas líneas, pero primero se debe importar la librería `pickle`, si no se encuentra instalada, se logra escribiendo `pip install pickle` en la terminal dentro de la carpeta del proyecto con el entorno virtual activo. Con la paquetería ya en el entorno, se manda a llamar dentro del archivo Python con `import pickle`.
 
 ```
-filename = '*modelName*.extension'
+filename = 'modelName.extension'
 pickle_input = open(filename, 'rb')
 model = pickle.load(pickle_input)
 ```
@@ -66,12 +95,12 @@ pip freeze > requirements.txt
 
 Donde se especificarán cada una de las librerías y versiones correspondientes que se encuentran instaladas en el entorno virtual y que se está ocupando actualmente en el proyecto.
 
-> Algunas de estas librerías pueden no ser declaradas explícitamente en el código Python causando confusión sobre si son necesarias o no, pero muchas de ellas son librerías que se requieren para que otras puedan trabajar correctamente. Como sucede con `itsdangerous`,`Jinja2` y `Wearkzeug`, que son librerías fundamentales para `Flask`.
+> Algunas de estas librerías pueden no ser declaradas explícitamente en el código Python causando confusión sobre si son necesarias o no, pero muchas de ellas son librerías que se requieren para que otras puedan trabajar correctamente. Como sucede con `itsdangerous`,`Jinja2` y `Werkzeug`, que son librerías fundamentales para `Flask`.
 
 `Procfile` es un archivo donde básicamente se le indica a Heroku cómo debe correr el proyecto. En Visual Studio Code puede resultar bastante fácil crearlo: basta con añadir un nuevo archivo a la carpeta del proyecto, nombrarlo exactamente como `Procfile` y en él escribir la siguiente línea:
 
 ```
-web: gunicorn *AppName*:app
+web: gunicorn AppName:app
 ```
 
 > Es importante haber instalado gunicorn en el entorno virtual: `pip install gunicorn` y que haya quedado declarado en `requirements.txt`, de otro modo, al intentar subir el proyecto a Heroku arrojará un error: `bash gunicorn command not found`.
@@ -81,7 +110,7 @@ Con estos archivos preparados, es posible comezar con la subida a Heroku, primer
 1. `heroku login` desde el directorio por default cuando se abre CMD
 2. Dirigirse a la ubicación de la App, con `cd carpeta\donde\se\encuentra\la\App`
 3. Si no se ha inicializado un repositorio, ejecutar `git init`
-4. Ejecutar `heroku git:remote -a *nombre-de-app*`, donde `*nombre-de-app*` es el nombre de la aplicación asignado desde Heroku.
+4. Ejecutar `heroku git:remote -a nombre-de-app`, donde `nombre-de-app` es el nombre de la aplicación asignado desde Heroku.
 5. Ejecutar `git add .` para agregar los cambios en el repositorio
 6. `git commit -m "Update App"` para definir el nombre del cambio
 7. Ejecutar `git push heroku main`.
