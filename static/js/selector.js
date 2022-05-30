@@ -23,7 +23,7 @@ $(document).ready(function () {
             window.alert('Los bebés no nacidos no se cuentan como pasajeros :)')
         }
         //Muy joven
-        if (edad < 16 && viaja_solo == '1'){
+        if (edad < 16 && viaja_solo == '0'){
             window.alert('Niño, eres muy pequeño para viajar sin acompañante')
         }
         //Demasiado viejo
