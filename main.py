@@ -24,6 +24,7 @@ data_storage = {
 LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
 
 solo_flag = 0
+sexo_flag = 0 
 
 historia_edad = [   # < 18 años
                 'Regresas a tu camarote después de que un guardia te regañara por correr en el pasillo, cuando escuchas un estruendo. ',
@@ -86,14 +87,13 @@ def index():
 def prediccion():
 
     #Llegada de datos
-    valores = request.form.getlist('data[]')
     edad = request.form.get("edad")
     viaje = request.form.get("viaje")
     sexo = request.form.get("sexo")
     clase_pasajero = request.form.get("clase_pasajero")
     puerto = request.form.get("puerto")
     print(f"Tu edad es: {edad}, viaje: {viaje}, sexo: {sexo}, clase pasjaero: {clase_pasajero}, puerto: {puerto}")
-    
+    valores = [edad,  viaje, clase_pasajero,  puerto, sexo]
 
     #Importación del modelo predictivo
     filename = 'RegLog_model.sav'
@@ -102,6 +102,7 @@ def prediccion():
 
     #Guarda los valores en un diccionario: 
     guardar_variables_web(valores)
+    print(f"Datos en data_storage: {data_storage}")
  
     #Los datos se reasignan para ser compatibles con el modelo predictivo: 
     pasajero = guardar_datos_pasajero()
@@ -116,6 +117,7 @@ def prediccion():
 
 '''Funciones '''
 def guardar_variables_web(valores):
+    #LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
     global solo_flag
     global sexo_flag
     #Guardar las variables
@@ -125,6 +127,7 @@ def guardar_variables_web(valores):
         if key == 'edad':
             data_storage[key] = val
 
+        #Sexo 0: hombre, 1: mujer
         elif key == 'sexo':
             if val == 0 or val == 1:
                 data_storage[key] = val
@@ -140,7 +143,10 @@ def guardar_variables_web(valores):
             else:
                 data_storage[key] = 1
 
+        #Aqui entra el valor de pasajero y puerto:
+        # - len(data_storage[] es de tamaño 3) 
         else: 
+            print(f"key: {key}, val: {val}")
             for x in range(0,len(data_storage[key])): 
                 if x == val: 
                     data_storage[key][x] = 1
