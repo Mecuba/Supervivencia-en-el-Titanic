@@ -5,7 +5,6 @@ from flask.wrappers import Response
 import pickle
 import pandas as pd
 import random
-#from django.shortcuts import redirect
 
 HOST = ""
 
@@ -49,10 +48,14 @@ historia_clase =[  # Primera clase
                 'Mientras guardas un pan extra en tu bolsillo pensando en que será un rico desayuno para mañana, avanzas por el pasillo. '
                 ]
 
-historia_sexo = ['Escuchas que gritan "mujeres y niños primero" y, mientras piensas que eso es muy retrógrada, sigues a todos hacia los botes salvavidas. ']
+historia_sexo = [   # Hombre o Mujer (Historia vacía)
+                '',
+                    # Otro
+                'Escuchas que gritan "mujeres y niños primero" y, mientras piensas que eso es muy retrógrada, sigues a todos hacia los botes salvavidas. '
+                ]
 
 historia_puerto = [ # Francia
-                'Oh là là, siendo francés piensas en que sería más fácil decidir quién sube a los botes salvavidas si tuvieran una guillatina a la mano. C´est dommage. Alzas tu puño y saltas a luchar por tu libertad.' ,
+                'Oh là là, siendo francés piensas en que sería más fácil decidir quién sube a los botes salvavidas si tuvieran una guillatina a la mano. C´est dommage. Alzas tu puño y saltas a luchar por tu libertad. ',
                 'Recordando el deseo de la liberté que corre por tu sangre francesa, tientas con la idea de luchar por tu lugar en el bote salvavidas en vez de esperar "civilizadamente" como el demás rebaño de ovejas hace. ',
                     # Inglaterra
                 'Como buen inglés, piensas que este sería un buen momento para una taza de té. Mientras, sigues empujando para ver si logras subir a algún bote salvavidas. ',
@@ -92,7 +95,7 @@ def prediccion():
     print(f"Tu edad es: {edad}, viaje: {viaje}, sexo: {sexo}, clase pasjaero: {clase_pasajero}, puerto: {puerto}")
     
 
-    #Importanción del modelo predictivo
+    #Importación del modelo predictivo
     filename = 'RegLog_model.sav'
     pickle_in = open(filename, 'rb')
     modelo_Titanic = pickle.load(pickle_in)
@@ -114,12 +117,21 @@ def prediccion():
 '''Funciones '''
 def guardar_variables_web(valores):
     global solo_flag
-        #Guardar las variables
+    global sexo_flag
+    #Guardar las variables
     for val, key in zip(valores, LISTA_VALORES): 
         val = int(val)
-        #Guarda el valor de la edad y sexo: 
-        if key == 'edad' or key == 'sexo':
+
+        if key == 'edad':
             data_storage[key] = val
+
+        elif key == 'sexo':
+            if val == 0 or val == 1:
+                data_storage[key] = val
+                sexo_flag = 0
+            else:
+                data_storage[key] = random.randint(0,1)
+                sexo_flag = 1
 
         elif key == 'viaja_solo':
             solo_flag = val
@@ -128,8 +140,6 @@ def guardar_variables_web(valores):
             else:
                 data_storage[key] = 1
 
-
-        #Guarda las demás variables: 
         else: 
             for x in range(0,len(data_storage[key])): 
                 if x == val: 
@@ -173,7 +183,7 @@ def redactar_historia(pasajero):
     # Easter Egg !!!
     if pasajero['Age'][0] == 33 and pasajero['Pclass_2'][0] == 1 and pasajero['Sex_male'][0] == 1 and pasajero['TravelAlone'][0] == 1 and pasajero['Embarked_S'][0] == 1:
         pasajero_historia = ['---','---','---','---','---','No, mueres por feo xDxDxdxd --- --- --- --- ---']
-        # return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+        
     # Casos normales
     else:        
     #-- ¿Cómo influyó tu edad?
@@ -193,7 +203,7 @@ def redactar_historia(pasajero):
             pasajero_historia[1] = historia_clase[4 + random.randint(0,1)]
 
     #-- ¿Cómo influyó el sexo?
-        pasajero_historia[2] = historia_sexo[0]
+        pasajero_historia[2] = historia_sexo[sexo_flag]
 
     #-- ¿Cómo influyó el puerto de embarcación?
         if pasajero['Embarked_C'][0] == 1:
