@@ -84,6 +84,13 @@ def prediccion():
 
     #Llegada de datos
     valores = request.form.getlist('data[]')
+    edad = request.form.get("edad")
+    viaje = request.form.get("viaje")
+    sexo = request.form.get("sexo")
+    clase_pasajero = request.form.get("clase_pasajero")
+    puerto = request.form.get("puerto")
+    print(f"Tu edad es: {edad}, viaje: {viaje}, sexo: {sexo}, clase pasjaero: {clase_pasajero}, puerto: {puerto}")
+    
 
     #Importanción del modelo predictivo
     filename = 'RegLog_model.sav'

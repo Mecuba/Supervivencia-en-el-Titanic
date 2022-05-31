@@ -52,82 +52,81 @@
         </div>
     </div>
 
-    <div class="row justify-content-between align-items-center">
-        <div class="col-sm-12 col-lg-6" style="padding-bottom: 2vh; padding-top: 5vh;">
-            <h3>Taquilla</h3>
-            <!-- Edad -->
-            <div class="col-auto">
-                <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Qué edad tienes (en años)? </label>
-                <form class="col-auto">
-                    <input type="number" class="form-control" value="30" id="edad" >
-                </form>
-            </div>
-            <!-- Viajas solo -->
-            <div class="col-auto" >
-                <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Actualmente tienes pareja sentimental? :3 </label>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example" id="viaje">
-                        <option value="0">No :0</option>
-                        <option value="1">Sí :o</option>
-                        <option value="2">No, pero tengo amigos y familia que me quieren mucho c:</option>
-                    </select>
+    <!-- Form -->
+    <form action="/prediccion" method="post">
+        <div class="row justify-content-between align-items-center">
+            <div class="col-sm-12 col-lg-6" style="padding-bottom: 2vh; padding-top: 5vh;">
+                <h3>Taquilla</h3>
+                <!-- Edad -->
+                <div class="col-auto">
+                    <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Qué edad tienes (en años)? </label>
+                    <!-- <form class="col-auto"> -->
+                        <input type="number" class="form-control" value="30" id="edad" name="edad">
+                    <!-- </form> -->
                 </div>
-            </div>
-            <!-- Sexo -->
-            <div class="col-auto">
-                <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> Sexo: </label>
+                <!-- Viajas solo -->
+                <div class="col-auto" >
+                    <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Actualmente tienes pareja sentimental? :3 </label>
                     <div class="col">
-                        <select class="form-select" aria-label="Default select example" id="sexo">
-                            <option value="0">Mujer</option>
-                            <option value="1">Hombre</option>
+                        <select class="form-select" aria-label="Default select example" id="viaje" name="viaje">
+                            <option value="0">No :0</option>
+                            <option value="1">Sí :o</option>
+                            <option value="2">No, pero tengo amigos y familia que me quieren mucho c:</option>
                         </select>
-                    </div>    
-            </div>
-    <!-- Clase de pasajero -->
-            <div class="col-auto">
-             <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Cómo sueles ver películas? </label>           
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example" id="clase">
-                        <option value="0">Voy al cine cada ocho días y compro en dulcería B)</option>
-                        <option value="1">Veo pelis en Netflix :) </option>
-                        <option value="2">Bajo películas de Cuevana :p </option>
-                    </select>
+                    </div>
                 </div>
-            </div>
-            <!-- Puerto -->
-            <div class="col-auto">
-                <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Desde dónde abordarás? </label>
-                <div class="col">
-                    <select class="form-select" aria-label="Default select example" id="puerto">
-                        <option value="0">Francia (Cherbourg)</option>
-                        <option value="1">Irlanda (Queenstown)</option>
-                        <option value="2">Inglaterra (Southampton)</option>
-                    </select>
+                <!-- Sexo -->
+                <div class="col-auto">
+                    <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> Sexo: </label>
+                        <div class="col">
+                            <select class="form-select" aria-label="Default select example" id="sexo" name="sexo">
+                                <option value="0">Mujer</option>
+                                <option value="1">Hombre</option>
+                            </select>
+                        </div>    
+                </div>
+        <!-- Clase de pasajero -->
+                <div class="col-auto">
+                <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Cómo sueles ver películas? </label>           
+                    <div class="col">
+                        <select class="form-select" aria-label="Default select example" id="clase" name="clase_pasajero">
+                            <option value="0">Voy al cine cada ocho días y compro en dulcería B)</option>
+                            <option value="1">Veo pelis en Netflix :) </option>
+                            <option value="2">Bajo películas de Cuevana :p </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Puerto -->
+                <div class="col-auto">
+                    <label class="encabezado" style="padding: 1vh 1vh 1vh 0vh;"> ¿Desde dónde abordarás? </label>
+                    <div class="col">
+                        <select class="form-select" aria-label="Default select example" id="puerto" name="puerto">
+                            <option value="0">Francia (Cherbourg)</option>
+                            <option value="1">Irlanda (Queenstown)</option>
+                            <option value="2">Inglaterra (Southampton)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-        <!-- Imagenes -->
-        <div class="col-sm-12 col-lg-5"  style="margin-right: 5vh;">
-            <div class="col">
-                <img style="max-width: 100%; max-height: 100%;" src="{{ url_for('static', filename='img/Titanic.png')}}">
+            <!-- Imagenes -->
+            <div class="col-sm-12 col-lg-5"  style="margin-right: 5vh;">
+                <div class="col">
+                    <img style="max-width: 100%; max-height: 100%;" src="{{ url_for('static', filename='img/Titanic.png')}}">
+                </div>
             </div>
         </div>
-    </div>
    
     <!-- Submit button -->
-    <div class="row justify-content-center">
-        <div class="col-sm-4">
-            <label style="display: flex; justify-content: center; margin-top: 5vh;">
-                <form action="/prediccion" method="post">
-                    <button type="submit" class="btn btn-primary" id="Submit" style="width: 30vh; height: 5vh;">Comprar ticket</button>
-                </form>
-            </label>
-              
-        </div>
-    </div>
     
+        <div class="row justify-content-center">
+            <div class="col-sm-4">
+                <label style="display: flex; justify-content: center; margin-top: 5vh;">                
+                        <button type="submit" class="btn btn-primary" id="Submit" style="width: 30vh; height: 5vh;">Comprar ticket</button>
+                </label>
+            </div>
+        </div>
+    </form>
 
 </body>
 <script src="{{ url_for('static', filename='js/jquery.js')}}"></script>
