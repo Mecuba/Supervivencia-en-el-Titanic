@@ -13,15 +13,18 @@ app = Flask(__name__)
 '''Variables globales: '''
 
 #Acá se van a guardar los datos recibidos: 
-data_storage = {
-    'edad': 30, 
-    'pasajero': ['0','0','0'], 
-    'viaja_solo': '0', #0 = No
-    'puerto': ['0','0','0'],
-    'sexo': '0', #0 = Mujer
-}
-
-LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
+pasajero = {
+        'Age': ['0'],
+        'TravelAlone': ['0'],
+        'Pclass_1': ['0'],
+        'Pclass_2': ['0'],
+        'Pclass_3': ['0'],
+        'Embarked_C': ['0'],
+        'Embarked_Q': ['0'],
+        'Embarked_S': ['0'],
+        'Sex_male': ['0'],
+        'IsMinor': ['0']
+    }
 
 solo_flag = 0
 sexo_flag = 0 
@@ -87,13 +90,12 @@ def index():
 def prediccion():
 
     #Llegada de datos
-    edad = request.form.get("edad")
-    viaje = request.form.get("viaje")
-    sexo = request.form.get("sexo")
-    clase_pasajero = request.form.get("clase_pasajero")
-    puerto = request.form.get("puerto")
-    print(f"Tu edad es: {edad}, viaje: {viaje}, sexo: {sexo}, clase pasjaero: {clase_pasajero}, puerto: {puerto}")
-    valores = [edad,  viaje, clase_pasajero,  puerto, sexo]
+    edad = int(request.form.get("edad"))
+    solo = int(request.form.get("solo"))
+    sexo = int(request.form.get("sexo"))
+    clase = int(request.form.get("clase"))
+    puerto = int(request.form.get("puerto"))
+    valores_web = [edad, solo, sexo, clase, puerto]
 
     #Importación del modelo predictivo
     filename = 'RegLog_model.sav'
@@ -101,11 +103,10 @@ def prediccion():
     modelo_Titanic = pickle.load(pickle_in)
 
     #Guarda los valores en un diccionario: 
-    guardar_variables_web(valores)
-    print(f"Datos en data_storage: {data_storage}")
+    print(f"Datos que vienen de la página web: {valores_web}")
  
     #Los datos se reasignan para ser compatibles con el modelo predictivo: 
-    pasajero = guardar_datos_pasajero()
+    pasajero = guardar_datos_pasajero(valores_web)
     
     #Se predice la supervivencia según los datos recolectados
     pasajero['Survived'] = predecir_supervivencia(pasajero, modelo_Titanic)
@@ -116,62 +117,62 @@ def prediccion():
     return render_template("prediccion.html", historia = historia)
 
 '''Funciones '''
-def guardar_variables_web(valores):
-    #LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
+def guardar_datos_pasajero(valores):
     global solo_flag
     global sexo_flag
-    #Guardar las variables
-    for val, key in zip(valores, LISTA_VALORES): 
-        val = int(val)
+    # Guarda la Edad
+    pasajero['Age'][0] = valores[0]
+    
+    # Determina si es menor de edad o no
+    if valores[0] <= 16:
+        pasajero['IsMinor'][0] = 1
+    else:
+        pasajero['IsMinor'][0] = 0
+    
+    # Guarda el valor de Solo
+    solo_flag = int(valores[1])
+    if valores[1] == 0:
+        pasajero['TravelAlone'][0] = 1
+    else:
+        pasajero['TravelAlone'][0] = 0
 
-        if key == 'edad':
-            data_storage[key] = val
+    # Guarda el Sexo
+    if valores[2] == 2:
+        sexo_flag = 1
+        pasajero['Sex_male'][0] = random.randint(0,1)
+    else:
+        sexo_flag = 0
+        pasajero['Sex_male'][0] = valores[2]
 
-        #Sexo 0: hombre, 1: mujer
-        elif key == 'sexo':
-            if val == 0 or val == 1:
-                data_storage[key] = val
-                sexo_flag = 0
-            else:
-                data_storage[key] = random.randint(0,1)
-                sexo_flag = 1
+    # Guarda la Clase
+    if valores[3] == 0:
+        pasajero['Pclass_1'][0] = 1
+        pasajero['Pclass_2'][0] = 0
+        pasajero['Pclass_3'][0] = 0
+    elif valores[3] == 1:
+        pasajero['Pclass_1'][0] = 0
+        pasajero['Pclass_2'][0] = 1
+        pasajero['Pclass_3'][0] = 0
+    else:
+        pasajero['Pclass_1'][0] = 0
+        pasajero['Pclass_2'][0] = 0
+        pasajero['Pclass_3'][0] = 1
 
-        elif key == 'viaja_solo':
-            solo_flag = val
-            if val == 1 or val == 2:
-                data_storage[key] = 0
-            else:
-                data_storage[key] = 1
+    # Guarda el Puerto
+    # print(range(pasajero['Embarked_C'], pasajero['Embarked_S']))
+    if valores[4] == 0:
+        pasajero['Embarked_C'][0] = 1
+        pasajero['Embarked_Q'][0] = 0
+        pasajero['Embarked_S'][0] = 0
+    elif valores[4] == 1:
+        pasajero['Embarked_C'][0] = 0
+        pasajero['Embarked_Q'][0] = 1
+        pasajero['Embarked_S'][0] = 0
+    else:
+        pasajero['Embarked_C'][0] = 0
+        pasajero['Embarked_Q'][0] = 0
+        pasajero['Embarked_S'][0] = 1
 
-        #Aqui entra el valor de pasajero y puerto:
-        # - len(data_storage[] es de tamaño 3) 
-        else: 
-            print(f"key: {key}, val: {val}")
-            for x in range(0,len(data_storage[key])): 
-                if x == val: 
-                    data_storage[key][x] = 1
-                else: 
-                    data_storage[key][x] = 0
-
-def guardar_datos_pasajero():
-    #Datos para enviar :
-    if (data_storage['edad'] <= 16): 
-        is_minor = 1 
-    else: 
-        is_minor = 0
-
-    pasajero = {
-        'Age': [data_storage['edad']],
-        'TravelAlone': [data_storage['viaja_solo']],
-        'Pclass_1': [data_storage['pasajero'][0]],
-        'Pclass_2': [data_storage['pasajero'][1]],
-        'Pclass_3': [data_storage['pasajero'][2]],
-        'Embarked_C': [data_storage['puerto'][0]],
-        'Embarked_Q': [data_storage['puerto'][1]],
-        'Embarked_S': [data_storage['puerto'][2]],
-        'Sex_male': [data_storage['sexo']],
-        'IsMinor': [is_minor],
-    }
     pasajero_pd = pd.DataFrame(pasajero)
 
     return pasajero_pd
@@ -184,7 +185,7 @@ def predecir_supervivencia(pasajero, modelo):
     return pasajero['Survived']
 
 def redactar_historia(pasajero):
-    pasajero_historia = ['edad','clase','sexo','puerto','compañía','supervivencia']
+    pasajero_historia = ['edad','clase','sexo','puerto','solo','supervivencia']
 
     # Easter Egg !!!
     if pasajero['Age'][0] == 33 and pasajero['Pclass_2'][0] == 1 and pasajero['Sex_male'][0] == 1 and pasajero['TravelAlone'][0] == 1 and pasajero['Embarked_S'][0] == 1:
@@ -193,7 +194,7 @@ def redactar_historia(pasajero):
     # Casos normales
     else:        
     #-- ¿Cómo influyó tu edad?
-        if pasajero['Age'][0] < 18:
+        if pasajero['Age'][0] < 16:
             pasajero_historia[0] = historia_edad[random.randint(0,1)]
         elif pasajero['Age'][0] < 79:
             pasajero_historia[0] = historia_edad[2 + random.randint(0,2)]
