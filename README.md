@@ -115,7 +115,11 @@ Con estos archivos preparados, es posible comezar con la subida a Heroku, primer
 6. `git commit -m "Update App"` para definir el nombre del cambio
 7. Ejecutar `git push heroku main`.
 
+Estos pasos se deberán ejecutar la primera vez que se suba todo el contenido del proyecto a Heroku, pero una vez que el repositorio ya se encuentra en la plataforma, omítase el **comando 3** (y los **comandos 4 y 5** si ya se hizo un *commit* aparte, por ejemplo, con algún asistente Git, pues los cambios ya han sido guardados y al ejecutar el **comando 7** se subirá la última actualización)
+
 > El **comando 7** hace referencia al *branch* en el que la aplicación debe estar completamente actualizada (si es que se está trabajando en repositorios de Github con múltiples *branches*), pero puede suceder que la versión más reciente del proyecto esté en un *branch* diferente. Así que es preferible actualizar el *branch main* (o en dado caso el *branch master*) para que Heroku pueda aceptar el *push*, si se hace desde el *branch* con nombre distinto a *main* o *master*, Heroku va a ignorar la construcción subiendo únicamente los archivos a un *branch* nuevo, de modo que la app no existirá.
+
+
     
 Si deseas más información al respecto no dudes en escribirnos a: contacto.mecuba@gmail.com
  
