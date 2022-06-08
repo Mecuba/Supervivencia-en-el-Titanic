@@ -26,6 +26,7 @@ pasajero = {
         'IsMinor': ['0']
     }
 
+historia = ['edad','clase','sexo','puerto','compañía','supervivencia']
 solo_flag = 0
 sexo_flag = 0 
 
@@ -53,7 +54,7 @@ historia_clase =[  # Primera clase
                 ]
 
 historia_sexo = [   # Hombre o Mujer (Historia vacía)
-                '',
+                ' ',
                     # Otro
                 'Escuchas que gritan "mujeres y niños primero" y, mientras piensas que eso es muy retrógrada, sigues a todos hacia los botes salvavidas. '
                 ]
@@ -88,6 +89,7 @@ def index():
 
 @app.route('/prediccion', methods=['POST'])
 def prediccion():
+    global historia 
 
     #Llegada de datos
     edad = int(request.form.get("edad"))
@@ -116,6 +118,16 @@ def prediccion():
     
     return render_template("prediccion.html", historia = historia)
 
+@app.route("/prediccion_climax", methods = ["POST"])
+def prediccion_climax(): 
+    global historia
+    return render_template("prediccion_climax.html", historia = historia)
+  
+@app.route("/prediccion_fin", methods = ["POST"])
+def prediccion_fin(): 
+    global historia
+    return render_template("prediccion_fin.html", historia = historia)
+    
 '''Funciones '''
 def guardar_datos_pasajero(valores):
     global solo_flag

@@ -43,3 +43,8 @@ p{
     text-align: justify;
 }
 
+.center{
+    display: flex;
+    justify-content: center;
+}
+
