@@ -118,12 +118,15 @@ def prediccion():
     
     return render_template("prediccion.html", historia = historia)
 
-@app.route("/continuar_hist", methods = ["POST"])
-def continuar_historia(): 
+@app.route("/prediccion_climax", methods = ["POST"])
+def prediccion_climax(): 
     global historia
-    return render_template("continuar_historia.html", historia = historia)
+    return render_template("prediccion_climax.html", historia = historia)
   
-
+@app.route("/prediccion_fin", methods = ["POST"])
+def prediccion_fin(): 
+    global historia
+    return render_template("prediccion_fin.html", historia = historia)
     
 '''Funciones '''
 def guardar_datos_pasajero(valores):
