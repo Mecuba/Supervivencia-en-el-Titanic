@@ -122,21 +122,9 @@ def prediccion():
 
 @app.route("/continuar_hist", methods = ["POST"])
 def continuar_historia(): 
-    global contador_historia 
     global historia
-
-    if contador_historia == 0: 
-        for i in range(3):
-            historia[i] = historia[i + 3]
-            print(i)
-        contador_historia += 1 
-        print(f'Contador historia: {contador_historia}')
-
-        return render_template("prediccion.html", historia = historia)
+    return render_template("continuar_historia.html", historia = historia)
   
-    else: 
-        contador_historia = 0
-        return render_template("index.html")
 
     
 '''Funciones '''
