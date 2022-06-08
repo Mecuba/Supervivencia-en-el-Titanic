@@ -142,7 +142,7 @@ def guardar_datos_pasajero(valores):
         pasajero['IsMinor'][0] = 0
     
     # Guarda el valor de Solo
-    solo_flag = int(valores[1])
+    solo_flag = valores[1]
     if valores[1] == 0:
         pasajero['TravelAlone'][0] = 1
     else:
@@ -171,7 +171,6 @@ def guardar_datos_pasajero(valores):
         pasajero['Pclass_3'][0] = 1
 
     # Guarda el Puerto
-    # print(range(pasajero['Embarked_C'], pasajero['Embarked_S']))
     if valores[4] == 0:
         pasajero['Embarked_C'][0] = 1
         pasajero['Embarked_Q'][0] = 0
@@ -197,7 +196,7 @@ def predecir_supervivencia(pasajero, modelo):
     return pasajero['Survived']
 
 def redactar_historia(pasajero):
-    pasajero_historia = ['edad','clase','sexo','puerto','solo','supervivencia']
+    pasajero_historia = ['edad','clase','sexo','puerto','compañía','supervivencia']
 
     # Easter Egg !!!
     if pasajero['Age'][0] == 33 and pasajero['Pclass_2'][0] == 1 and pasajero['Sex_male'][0] == 1 and pasajero['TravelAlone'][0] == 1 and pasajero['Embarked_S'][0] == 1:
