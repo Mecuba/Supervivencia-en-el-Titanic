@@ -3,7 +3,6 @@ from typing import List
 from flask import Flask, render_template, request
 from flask.wrappers import Response
 import pickle
-from matplotlib.pyplot import get
 import pandas as pd
 import random
 
@@ -30,7 +29,6 @@ pasajero = {
 historia = ['edad','clase','sexo','puerto','compañía','supervivencia']
 solo_flag = 0
 sexo_flag = 0 
-contador_historia = 0
 
 historia_edad = [   # < 18 años
                 'Regresas a tu camarote después de que un guardia te regañara por correr en el pasillo, cuando escuchas un estruendo. ',
@@ -56,7 +54,7 @@ historia_clase =[  # Primera clase
                 ]
 
 historia_sexo = [   # Hombre o Mujer (Historia vacía)
-                '',
+                ' ',
                     # Otro
                 'Escuchas que gritan "mujeres y niños primero" y, mientras piensas que eso es muy retrógrada, sigues a todos hacia los botes salvavidas. '
                 ]
