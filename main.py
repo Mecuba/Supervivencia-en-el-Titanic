@@ -3,6 +3,7 @@ from typing import List
 from flask import Flask, render_template, request
 from flask.wrappers import Response
 import pickle
+from matplotlib.pyplot import get
 import pandas as pd
 import random
 
@@ -23,8 +24,10 @@ data_storage = {
 
 LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
 
+historia = ['edad','clase','sexo','puerto','compañía','supervivencia']
 solo_flag = 0
 sexo_flag = 0 
+contador_historia = 0
 
 historia_edad = [   # < 18 años
                 'Regresas a tu camarote después de que un guardia te regañara por correr en el pasillo, cuando escuchas un estruendo. ',
@@ -85,6 +88,7 @@ def index():
 
 @app.route('/prediccion', methods=['POST'])
 def prediccion():
+    global historia 
 
     #Llegada de datos
     edad = request.form.get("edad")
@@ -115,6 +119,25 @@ def prediccion():
     
     return render_template("prediccion.html", historia = historia)
 
+@app.route("/continuar_hist", methods = ["POST"])
+def continuar_historia(): 
+    global contador_historia 
+    global historia
+
+    if contador_historia == 0: 
+        for i in range(3):
+            historia[i] = historia[i + 3]
+            print(i)
+        contador_historia += 1 
+        print(f'Contador historia: {contador_historia}')
+
+        return render_template("prediccion.html", historia = historia)
+  
+    else: 
+        contador_historia = 0
+        return render_template("index.html")
+
+    
 '''Funciones '''
 def guardar_variables_web(valores):
     #LISTA_VALORES = ['edad', 'pasajero', 'viaja_solo', 'puerto', 'sexo']
@@ -146,7 +169,6 @@ def guardar_variables_web(valores):
         #Aqui entra el valor de pasajero y puerto:
         # - len(data_storage[] es de tamaño 3) 
         else: 
-            print(f"key: {key}, val: {val}")
             for x in range(0,len(data_storage[key])): 
                 if x == val: 
                     data_storage[key][x] = 1
