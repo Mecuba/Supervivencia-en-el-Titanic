@@ -70,7 +70,7 @@ historia_puerto = [ # Francia
                 ]
 
 historia_solo = [   # Solo
-                'Feliz de no haber viajado con acompañante, agarras doble chaleco salvavida. por si las moscas, claro. ',
+                'Feliz de no haber viajado con acompañante, agarras doble chaleco salvavida. Por si las moscas, claro. ',
                     # Acompañado
                 'Mientras se hunde el barco, escoges con tu pareja sobre qué tabla de madera podrán flotar los dos, cuando otra pareja de una chica rica y un chico pobre y guapo se la agandallan. Oh bueno, ojalá la compartan justamente y no deje la chica congelarse al chico aún cuando se ve que claramente caben los dos ahí. ',
                 'Mientras hacen piedra, papel o tijera por ver quién se lleva el último chaleco salvavidas, tú y tu grupo ven cómo bajan el último bote salvavidas. Oh bueno, seguro habrán muchas tablitas de madera tamaño-individual a las qué subirse. '
@@ -118,12 +118,12 @@ def prediccion():
     
     return render_template("prediccion.html", historia = historia)
 
-@app.route("/prediccion_climax", methods = ["POST"])
+@app.route("/prediccion_climax")
 def prediccion_climax(): 
     global historia
     return render_template("prediccion_climax.html", historia = historia)
   
-@app.route("/prediccion_fin", methods = ["POST"])
+@app.route("/prediccion_fin")
 def prediccion_fin(): 
     global historia
     return render_template("prediccion_fin.html", historia = historia)
