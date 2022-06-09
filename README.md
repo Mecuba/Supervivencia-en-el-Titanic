@@ -105,6 +105,8 @@ web: gunicorn AppName:app
 
 > Es importante haber instalado gunicorn en el entorno virtual: `pip install gunicorn` y que haya quedado declarado en `requirements.txt`, de otro modo, al intentar subir el proyecto a Heroku arrojará un error: `bash gunicorn command not found`.
 
+Finalmente un archivo `runtime.txt` para especificar la versión de Python que debería usar Heroku para correr el proyecto. Si bien esto no es estrictamente necesario, puede llegar a se útil si alguna actualización de Python modifique parte del comportamiento de la aplicación web.
+
 Con estos archivos preparados, es posible comezar con la subida a Heroku, primero creando una cuenta en la plataforma y luego ejecutando los siguientes comandos (puede ser desde el CMD):
 
 1. `heroku login` desde el directorio por default cuando se abre CMD
@@ -115,11 +117,9 @@ Con estos archivos preparados, es posible comezar con la subida a Heroku, primer
 6. `git commit -m "Update App"` para definir el nombre del cambio
 7. Ejecutar `git push heroku main`.
 
-Estos pasos se deberán ejecutar la primera vez que se suba todo el contenido del proyecto a Heroku, pero una vez que el repositorio ya se encuentra en la plataforma, omítase el **comando 3** (y los **comandos 4 y 5** si ya se hizo un *commit* aparte, por ejemplo, con algún asistente Git, pues los cambios ya han sido guardados y al ejecutar el **comando 7** se subirá la última actualización)
+Estos pasos se deberán ejecutar la primera vez que se suba todo el contenido del proyecto a Heroku, pero una vez que el repositorio ya se encuentra en la plataforma, omítase el **comando 3** (y los **comandos 5 y 6** si ya se hizo un *commit* aparte, por ejemplo, con algún asistente Git, pues los cambios ya han sido guardados y al ejecutar el **comando 7** se subirá la última actualización). Igualmente si ya se encuentra inciciada la sesión de Heroku y se han ejecutado todos los pasos, con cada *commit* realizado con algún asistente Git puede solo ejecutarse el **comando 7**.
 
 > El **comando 7** hace referencia al *branch* en el que la aplicación debe estar completamente actualizada (si es que se está trabajando en repositorios de Github con múltiples *branches*), pero puede suceder que la versión más reciente del proyecto esté en un *branch* diferente. Así que es preferible actualizar el *branch main* (o en dado caso el *branch master*) para que Heroku pueda aceptar el *push*, si se hace desde el *branch* con nombre distinto a *main* o *master*, Heroku va a ignorar la construcción subiendo únicamente los archivos a un *branch* nuevo, de modo que la app no existirá.
-
-
-    
+   
 Si deseas más información al respecto no dudes en escribirnos a: contacto.mecuba@gmail.com
  
