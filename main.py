@@ -26,7 +26,7 @@ pasajero = {
         'IsMinor': ['0']
     }
 
-historia = ['edad','clase','sexo','puerto','compañía','supervivencia']
+historia = [' ',' ',' ',' ',' ',' '] #'edad','clase','sexo','puerto','compañía','supervivencia'
 solo_flag = 0
 sexo_flag = 0 
 
