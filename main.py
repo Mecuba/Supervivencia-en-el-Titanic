@@ -120,12 +120,12 @@ def prediccion():
 
 @app.route("/prediccion_climax")
 def prediccion_climax(): 
-    global historia
+    # global historia
     return render_template("prediccion_climax.html", historia = historia)
   
 @app.route("/prediccion_fin")
 def prediccion_fin(): 
-    global historia
+    # global historia
     return render_template("prediccion_fin.html", historia = historia)
     
 '''Funciones '''
