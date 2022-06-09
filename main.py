@@ -26,7 +26,7 @@ pasajero = {
         'IsMinor': ['0']
     }
 
-historia = [' ',' ',' ',' ',' ',' '] #'edad','clase','sexo','puerto','compañía','supervivencia'
+# historia = [' ',' ',' ',' ',' ',' '] #'edad','clase','sexo','puerto','compañía','supervivencia'
 solo_flag = 0
 sexo_flag = 0 
 
@@ -89,8 +89,7 @@ def index():
 
 @app.route('/prediccion', methods=['POST'])
 def prediccion():
-    global historia 
-
+    global historia
     #Llegada de datos
     edad = int(request.form.get("edad"))
     solo = int(request.form.get("solo"))
@@ -120,12 +119,12 @@ def prediccion():
 
 @app.route("/prediccion_climax")
 def prediccion_climax(): 
-    # global historia
+    global historia
     return render_template("prediccion_climax.html", historia = historia)
   
 @app.route("/prediccion_fin")
 def prediccion_fin(): 
-    # global historia
+    global historia
     return render_template("prediccion_fin.html", historia = historia)
     
 '''Funciones '''
