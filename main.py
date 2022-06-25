@@ -80,7 +80,7 @@ historia_supervivencia = [  # Final
                         'El barco se ha hundido, partido en dos y los músicos ya no suenan a lo lejos. Algunos abordaron a salvo el Carpathia y a otros no los dejaron subirse a tablitas de madera para sobrevivir. Salen los periódicos el día siguiente y en la lista de supervivientes... ',
                             # ¿Sobreviviste?
                         'No está tu nombre. :( Ahora tu cadáver yace en lo más profundo del océano... Esperemos que, si hacen una película de esto, al menos consigan a un buen extra que sepa hacer buenos soniditos de cubo de hielo para representarte. ',
-                        '¡Está tu nombre! ¡Enhorabuena, sobreviviste al hundimiento del Titanic! Ahora esperemos que, si hacen una película de esto, al menos consigan a un buen extra para representarte. '
+                        '\n¡Está tu nombre! \n¡Enhorabuena, sobreviviste al hundimiento del Titanic! Ahora esperemos que, si hacen una película de esto, al menos consigan a un buen extra para representarte. '
                         ]
 
 @app.route('/')
