@@ -47,7 +47,7 @@ historia_clase =[  # Primera clase
                 'Pensando en si las £88,000 que costó tu boleto cubrirán también botes salvavidas de lujo, sigues las indicaciones de los marineros a cargo. ',
                     # Segunda clase
                 'Te preguntas si todo este alboroto es por uno de esos estorbosos icebergs. Un día de estos debería hacer una Policía Internacional de Icebergs con sitio web y toda la cosa. Eso les enseñará. Sigues caminando hacia los botes salvavidas. ',
-                'Si esto va mal, al menos sabes que hay otro barco cerca, el Carpathia, que los puede venir a ayudar. Ojalá el jefe de telecomunicaciones del Titanic no haya mandado a dormir al otro operador de radio hace poquito porque le dijo que estaba haciendo demasiado ruido. Sigues avanzando por el pasillo. ',
+                'Si esto va mal, al menos sabes que hay otro barco cerca, el RMS Californian, que los puede venir a ayudar. Ojalá el jefe de telecomunicaciones del Titanic no haya mandado a dormir al otro operador de radio hace poquito porque le dijo que estaba haciendo demasiado ruido. Sigues avanzando por el pasillo. ',
                     # Tercera clase
                 'Pensando en qué injusto y a la vez práctico es que en la tercera clase separen los adultos solteros en los extremos opuestos del barco para que no se eh... ¿conozcan? Sigues las indicaciones de los marineros a cargo. ',
                 'Mientras guardas un pan extra en tu bolsillo pensando en que será un rico desayuno para mañana, avanzas por el pasillo. '
@@ -79,8 +79,8 @@ historia_solo = [   # Solo
 historia_supervivencia = [  # Final
                         'El barco se ha hundido, partido en dos y los músicos ya no suenan a lo lejos. Algunos abordaron a salvo el Carpathia y a otros no los dejaron subirse a tablitas de madera para sobrevivir. Salen los periódicos el día siguiente y en la lista de supervivientes... ',
                             # ¿Sobreviviste?
-                        'No está tu nombre. :( Ahora tu cadáver yace en lo más profundo del océano... Esperemos que, si hacen una película de esto, al menos consigan a un buen extra que sepa hacer buenos soniditos de cubo de hielo para representarte. ',
-                        '\n¡Está tu nombre! \n¡Enhorabuena, sobreviviste al hundimiento del Titanic! Ahora esperemos que, si hacen una película de esto, al menos consigan a un buen extra para representarte. '
+                        '\n\nNo está tu nombre. :( \n\nAhora tu cadáver yace en lo más profundo del océano... Esperemos que, si hacen una película de esto, al menos consigan a un buen extra que sepa hacer buenos soniditos de cubo de hielo para representarte. ',
+                        '\n\n¡Está tu nombre! \n\n¡Enhorabuena, sobreviviste al hundimiento del Titanic! Ahora esperemos que, si hacen una película de esto, al menos consigan a un buen extra para representarte. '
                         ]
 
 @app.route('/')
